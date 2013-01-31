@@ -19,7 +19,8 @@ class User{
 						$users->{$userEmail}->userFirstName, 
 						$users->{$userEmail}->userLastName, 
 						$users->{$userEmail}->userPassword, 
-						$users->{$userEmail}->usesFoursquare
+						$users->{$userEmail}->usesFoursquare,
+						$users->{$userEmail}->foursquareToken
 					);
 				}
 			}
@@ -39,7 +40,8 @@ class User{
 					$users->{$userEmail}->userFirstName, 
 					$users->{$userEmail}->userLastName, 
 					$users->{$userEmail}->userPassword, 
-					$users->{$userEmail}->usesFoursquare
+					$users->{$userEmail}->usesFoursquare,
+					$users->{$userEmail}->foursquareToken
 				);
 			}
 		}
@@ -51,15 +53,15 @@ class User{
 	private $userEmail;
 	private $userPassword;
 	private $usesFoursquare;
-	//Foursquare attrs
-	//Twilio attrs
+	private $foursquareToken;
 	
-	public function __construct($userEmail, $userFirstName, $userLastName, $userPassword, $usesFoursquare){
+	public function __construct($userEmail, $userFirstName, $userLastName, $userPassword, $usesFoursquare, $foursquareToken){
 		$this->userEmail = $userEmail;
 		$this->userFirstName = $userFirstName;
 		$this->userLastName = $userLastName;
 		$this->userPassword = $userPassword;
 		$this->usesFoursquare = $usesFoursquare;
+		$this->foursquareToken = $foursquareToken;
 	}
 	
 	public function getUserFirstName(){
@@ -98,6 +100,14 @@ class User{
 		return $this->usesFoursquare;
 	}
 	
+	public function setFoursquareToken($foursquareToken){
+		$this->foursquareToken = $foursquareToken;
+	}
+	
+	public function getFoursquareToken(){
+		return $this->foursquareToken;
+	}
+	
 	/**
 	 * Creates the user in the DB
 	 */
@@ -111,7 +121,8 @@ class User{
 			'userFirstName' => $this->userFirstName,
 			'userLastName' => $this->userLastName,
 			'userPassword' => $this->userPassword,
-			'usesFoursquare' => false
+			'usesFoursquare' => false,
+			'foursquareToken' => ""
 		);
 		$jsonUsers = json_encode($users);
 		file_put_contents("users.json", $jsonUsers);

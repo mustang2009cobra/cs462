@@ -20,7 +20,8 @@ switch($cmd){
 				'userEmail' => $success->getUserEmail(),
 				'userFirstName' => $success->getUserFirstName(),
 				'userLastName' => $success->getUserLastName(),
-				'usesFoursquare' => $success->getUsesFoursquare()
+				'usesFoursquare' => $success->getUsesFoursquare(),
+				'foursquareToken' => $success->getFoursquareToken()
 			));
 		}
 		else{
@@ -34,7 +35,8 @@ switch($cmd){
 				'userEmail' => $success->getUserEmail(),
 				'userFirstName' => $success->getUserFirstName(),
 				'userLastName' => $success->getUserLastName(),
-				'usesFoursquare' => $success->getUsesFoursquare()
+				'usesFoursquare' => $success->getUsesFoursquare(),
+				'foursquareToken' => $success->getFoursquareToken()
 			));
 		}
 		else{
@@ -48,7 +50,8 @@ switch($cmd){
 				'userEmail' => $user->getUserEmail(),
 				'userFirstName' => $user->getUserFirstName(),
 				'userLastName' => $user->getUserLastName(),
-				'usesFoursquare' => $user->getUsesFoursquare()
+				'usesFoursquare' => $user->getUsesFoursquare(),
+				'foursquareToken' => $user->getFoursquareToken()
 			));
 		}
 		else{
@@ -70,7 +73,8 @@ switch($cmd){
 				'userEmail' => $user->getUserEmail(),
 				'userFirstName' => $user->getUserFirstName(),
 				'userLastName' => $user->getUserLastName(),
-				'usesFoursquare' => $user->getUsesFoursquare()
+				'usesFoursquare' => $user->getUsesFoursquare(),
+				'foursquareToken' => $user->getFoursquareToken()
 			));
 		}
 		else{
@@ -92,7 +96,7 @@ function isAuthenticated(){
 }
 
 function createAccount($userEmail, $userFirstName, $userLastName, $userPassword){
-	$user = new User($userEmail, $userFirstName, $userLastName, $userPassword, false);
+	$user = new User($userEmail, $userFirstName, $userLastName, $userPassword, false, null);
 	$success = $user->save();
 	if($success){
 		$_SESSION['user'] = $user;
