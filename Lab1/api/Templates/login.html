@@ -1,0 +1,81 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+	<div class="container">
+	  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </a>
+	  <a class="brand">Lab 1</a>
+	  
+	</div>
+  </div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="span2"></div>
+		<div class="span4">
+			<h2>Login</h2>
+			<fieldset>
+				<input type="text" id="loginUserEmail" placeholder="Email">
+				<input type="password" id="loginUserPassword" placeholder="Password"> <br />
+				<button id="login" class="btn btn-primary">Login</button>
+			</fieldset>
+		</div>
+		<div class="span4">
+			<h2>...Or create an account</h2>
+			<fieldset>
+				<input type="text" id="createUserFirstName" placeholder="First Name">
+				<input type="text" id="createUserLastName" placeholder="Last Name">
+				<input type="text" id="createUserEmail" placeholder="Email Address">
+				<input type="text" id="createRepeatUserEmail" placeholder="Retype Email Address">
+				<input type="password" id="createUserPassword" placeholder="Password">
+				<input type="password" id="createRepeatUserPassword" placeholder="Retype Password"><br />
+				<button id="createAccount" class="btn btn-primary">Create Account</button>
+			</fieldset>
+		</div>
+		<div class="span2"></div>
+	</div>
+
+</div> <!-- /container -->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#login").click(function(){
+			Util.ajax({
+				cmd : "login",
+				userEmail : $("#loginUserEmail").val(),
+				userPassword : $("#loginUserPassword").val()
+			},
+			function(response){
+				if(response.status == "OK"){
+					AppData.User = response.data;
+					Renderer.renderUserDashboardPage();
+				}
+				else{
+					alert("Incorrect credentials");
+				}
+			});
+		});
+		
+		$("#createAccount").click(function(){
+			Util.ajax({
+				cmd : "createAccount",
+				userFirstName : $("#createUserFirstName").val(),
+				userLastName : $("#createUserLastName").val(),
+				userEmail : $("#createUserEmail").val(),
+				userPassword : $("#createUserPassword").val()
+			},
+			function(response){
+				if(response.status == "OK"){
+					AppData.User = response.data;
+					Renderer.renderUserDashboardPage();
+				}
+				else{
+					alert("There was a problem creating your account");
+				}
+			});
+		});
+	});
+</script>

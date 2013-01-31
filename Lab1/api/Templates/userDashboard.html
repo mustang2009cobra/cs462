@@ -1,0 +1,98 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand">Lab 1</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav pull-right">
+					<li><a id="logoutLink">Logout</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+  </div>
+</div>
+
+<div class="container">
+	<div class="container">
+		<div class="row">
+			<div class="span2"></div>
+			<div class="span8">
+				<h1 id="welcomeGreeting"></h1>
+			</div>
+			<div class="span2"></div>
+		</div>
+		<div class="row">
+			<div class="span2"></div>
+			<div id="userContent" class="span4">
+			</div>
+			<div class="span4">
+				<h2>Search for a user</h2>
+				<fieldset>
+					<input type="text" id="searchUserEmail" placeholder="User Email"><br />
+					<button id="searchForUser" class="btn btn-primary">Search</button>
+				</fieldset>	
+			</div>
+			<div class="span2"></div>
+		</div>
+	</div>
+	
+</div> <!-- /container -->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		if(Util.isset(AppData.User)){
+			renderUserContent();
+		}
+		else{
+			Renderer.renderLandingPage();
+		}
+		
+		$("#logoutLink").click(function(){
+			Util.ajax({
+				cmd : "logout"
+			},
+			function(){
+				Renderer.renderLandingPage();
+			});
+		});
+		
+		$("#searchForUser").click(function(){
+			searchForUser();
+		});
+	});
+	
+	function renderUserContent(){
+		var welcomeMsg = "Welcome " + AppData.User.userFirstName + " " + AppData.User.userLastName + "!";
+		$("#welcomeGreeting").html(welcomeMsg);
+		
+		var userContent;
+		if(AppData.User.usesFoursquare){
+			userContent = "<p>You're using foursquare!</p>";
+			$("#userContent").html(userContent);
+		}
+		else{
+			userContent = "<h2>Your Page Content</h2>"
+				+		"<p>Your page is lonely! Want to use Foursquare?</p>"
+				+ 		"<button class='btn btn-primary' id='connectFoursquareBtn'>Connect</button>";
+			$("#userContent").html(userContent);
+			$("#connectFoursquareBtn").click(function(){
+				connectToFoursquare();
+			});
+		}
+	}
+	
+	function connectToFoursquare(){
+		
+	}
+	
+	function searchForUser(){
+		var userEmail = $("#searchUserEmail").val();
+		
+		Renderer.renderUserPage(userEmail);
+	}
+
+</script>

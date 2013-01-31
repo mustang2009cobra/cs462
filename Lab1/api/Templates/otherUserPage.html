@@ -1,0 +1,59 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand">Lab 1</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav pull-right">
+					<li><a id="logoutLink">Logout</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+  </div>
+</div>
+
+<div class="container">
+		<div class="row">
+			<div class="span2"></div>
+			<div class="span8">
+				<h1 id="welcomeGreeting"></h1>
+			</div>
+			<div class="span2"></div>
+		</div>
+		<div class="row">
+			<div class="span2"></div>
+			<div id="userContent" class="span8">
+				<h2 id="userName"></h2>
+			</div>
+			<div class="span2"></div>
+		</div>
+</div> <!-- /container -->
+
+<div id="userEmail" style="display:none;">{{userEmail}}</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		Util.ajax({
+			cmd : "getUserData",
+			userEmail : $("#userEmail").html()
+		},
+		function(response){
+			if(response.status == "OK"){
+				$("#userName").html(response.data.userFirstName + " " + response.data.userLastName);
+				if(response.data.usesFoursquare == true){
+					//Send off call to foursquare for the id
+				}
+				else{
+					$("#userContent").append("<p>This user doesn't connect to Foursquare</p>");
+				}
+			}
+			else{
+				$("#userName").html("No user exists with this email address");
+			}
+		});
+	});
+</script>
