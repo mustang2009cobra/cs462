@@ -39,6 +39,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		alert("JKER");
+		$("#searchForUser").click(function(){
+			alert("You clicked me!");
+		});
 	});
 </script>
