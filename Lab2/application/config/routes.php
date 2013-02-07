@@ -38,8 +38,7 @@
 |
 */
 
-$route['default_controller'] = "home/view";
-$route['(:any)'] = 'home/view/$1';
+$route['default_controller'] = "home/view";	
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

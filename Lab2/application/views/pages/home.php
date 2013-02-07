@@ -6,10 +6,10 @@
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	  </a>
-	  <a class="brand" id="homelink">Lab 1</a>
+	  <a class="brand" href="<?= site_url('/home/view'); ?>">Flower Shop</a>
 	  <div class="nav-collapse collapse">
 		<ul class="nav pull-right">
-		  <li><a id="login">Login</a></li>
+		  <li><a href="<?= site_url('/home/login'); ?>">Login</a></li>
 		</ul>
 	  </div><!--/.nav-collapse -->
 	</div>
