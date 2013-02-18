@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
 	<div class="container">
@@ -12,6 +16,16 @@
 </div>
 
 <div class="container">
+    <div id="error" style="display:none;"><?php  if(isset($_GET['error'])) {
+        echo $_GET['error'];
+    }?></div>
+    <div class="row">
+        <div class="span2"></div>
+        <div id="alertsArea" class="span8">
+
+        </div>
+        <div class="span2"></div>
+    </div>
 	<div class="row">
 		<div class="span2"></div>
 		<div class="span4">
@@ -19,8 +33,8 @@
 			<?php echo validation_errors(); ?>
 			<?php echo form_open('users/login'); ?>
 			<fieldset>
-				<input type="text" id="loginUserEmail" placeholder="Email">
-				<input type="password" id="loginUserPassword" placeholder="Password"> <br />
+				<input type="text" name="loginUserEmail" placeholder="Email">
+				<input type="password" name="loginUserPassword" placeholder="Password"> <br />
 				<button id="login" class="btn btn-primary">Login</button>
 			</fieldset>
 			</form>
@@ -45,8 +59,14 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#searchForUser").click(function(){
-			alert("You clicked me!");
-		});
+		var error = $("#error").html();
+        if(error == "baduser"){
+            var errorMsg = "<div class='alert alert-error fade in' href='#'>"
+                            + "<button type='button' class='close' data-dismiss='alert'>×</button>"
+                            + "Invalid User Credentials"
+                            + "</div>";
+            $("#alertsArea").html(errorMsg);
+        }
+
 	});
 </script>
