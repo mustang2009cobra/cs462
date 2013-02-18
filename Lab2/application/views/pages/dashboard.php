@@ -24,6 +24,30 @@ if(!$user){
 </div>
 
 <div class="container">
+    <div id="error" style="display:none;">
+        <?php
+        if(isset($_GET['error'])) {
+            if($_GET['error'] == "true"){
+                if($user->admin){
+                    echo "ownererror";
+                }
+                else{
+                    echo "drivererror";
+                }
+            }
+            else{
+                echo "noproblem";
+            }
+        }
+        ?>
+    </div>
+    <div class="row">
+        <div class="span2"></div>
+        <div id="alertsArea" class="span8">
+
+        </div>
+        <div class="span2"></div>
+    </div>
 	<div class="row">
 		<div class="span2"></div>
 		<div class="span8">
@@ -46,9 +70,34 @@ if(!$user){
 </div> <!-- /container -->
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		
-	});
+    $(document).ready(function(){
+        var error = $("#error").html().trim();
+        if(error == "drivererror"){
+            showErrorAlert("Error: Could not register ESL");
+        }
+        else if(error == "ownererror"){
+            showErrorAlert("Error: Could not create your delivery request");
+        }
+        else if(error == "noproblem"){
+            showSuccessAlert("Creation Successful!");
+        }
+    });
+
+    function showErrorAlert(msg){
+        var errorMsg = "<div class='alert alert-error fade in' href='#'>"
+                + "<button type='button' class='close' data-dismiss='alert'>×</button>"
+                + msg
+                + "</div>";
+        $("#alertsArea").html(errorMsg);
+    }
+
+    function showSuccessAlert(msg){
+        var errorMsg = "<div class='alert alert-success fade in' href='#'>"
+                + "<button type='button' class='close' data-dismiss='alert'>×</button>"
+                + msg
+                + "</div>";
+        $("#alertsArea").html(errorMsg);
+    }
 </script>
 
 <?php
@@ -61,9 +110,9 @@ function renderOwnerDashboard($user){
     <?php echo form_open('owners/submitDeliveryRequest'); ?>
     <fieldset>
         <input type="text" name="shopName" placeholder="Shop Name"><br>
-        <input type="text" name="customerName" placeholder="Customer Name"><br>
-        <input type="text" name="deliveryLocation" placeholder="Delivery Location"><br>
-        <input type="text" name="compensationAmount" placeholder="Compensation Amount"><br>
+        <input type="text" name="shopAddress" placeholder="Shop Address"><br>
+        <input type="text" name="deliveryAddress" placeholder="Delivery Address"><br>
+        <input type="text" name="deliveryTime" placeholder="Delivery Time"><br>
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
     </fieldset>
     </form>
