@@ -19,7 +19,7 @@ class Deliveryrequests_model extends CI_Model {
         $result = $this->db->insert('deliveryrequests', $data);
 
         if($result){
-            $this->signalESLs();
+            $this->signalAllESLs($data);
         }
 
         return $result;
@@ -30,9 +30,35 @@ class Deliveryrequests_model extends CI_Model {
         return $ESLs;
     }
 
-    private function signalESLs(){
+    private function signalAllESLs($deliveryRequest){
         $ESLs = $this->get_all_ESLs();
 
-        //Signal ESLs here
+        foreach($ESLs as $value){
+            $esl = $value->driverESL;
+            $notificationData = array(
+                "_domain" => "rfq",
+                "_name" => "delivery_ready",
+                "shopAddress" => $deliveryRequest['shopAddress'],
+                "deliveryAddress" => $deliveryRequest['deliveryAddress'],
+                "deliveryTime" => $deliveryRequest['deliveryTime']
+            );
+            $this->signalESL($esl, $notificationData);
+        }
+    }
+
+    private function signalESL($url, $data){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            print curl_error($ch);
+        } else {
+            curl_close($ch);
+        }
+        return $result;
     }
 }
