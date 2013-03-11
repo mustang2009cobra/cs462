@@ -27,7 +27,7 @@ if($user){
 	<div class="row">
 		<div class="span2"></div>
 		<div class="span8">
-			<h1>Welcome to our Flower Shop website!</h1>
+			<h1>Welcome to our delivery drivers website!</h1>
 		</div>
 		<div class="span2"></div>
 	</div>
@@ -35,9 +35,8 @@ if($user){
 		<div class="span2"></div>
 		<div class="span8">
 			<h2>Welcome!</h2>
-			<p>We've got some seriously good stuff going on here at our Flower Shop website. To get started, just
-            click the "Login" button at the top-right of the screen. You'll be able to register your URL so that
-            we can notify you when there's a delivery to be made.</p>
+			<p>We've got some seriously good stuff going on here at our delivery driver website. To get started, just
+            click the "Login" button at the top-right of the screen.</p>
 		</div>
 		<div class="span2"></div>
 	</div>
