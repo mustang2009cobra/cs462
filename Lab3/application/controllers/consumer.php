@@ -8,9 +8,23 @@ class Consumer extends CI_Controller {
     public function receive(){
         $eslId = $this->uri->segment(3); //Get the flower shop ID
 
-        //REMOVE LATER
-        var_dump("NOT YET IMPLEMENTED!");
-        die();
+        $formData = $this->input->post(NULL, TRUE);
+
+        //DATA THAT COMES FROM PRODUCERS
+        $domain = $formData['_domain'];
+        $name = $formData['_name'];
+        $shopAddress = $formData['shopAddress'];
+        $deliveryAddress = $formData['deliveryAddress'];
+        $pickupTime = $formData['pickupTime'];
+        $deliveryTime = $formData['deliveryTime'];
+
+        $respondToEvent = true;
+
+        //CHECK WHETHER TO RESPOND TO EVENT
+
+        if($respondToEvent){
+            //Respond to url via curl
+        }
     }
 
     public function foursquare(){

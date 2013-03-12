@@ -119,7 +119,7 @@ function renderRegisteredESLs($esls){
         echo "<p> Address: $esl->shopAddress</p>";
         echo "<p> Flower Shop ESL: $esl->shopESL</p>";
         $siteURL = site_url();
-        $consumerESL = $siteURL . "/receive/" . $esl->id;
+        $consumerESL = $siteURL . "/consumer/receive/" . $esl->id;
         echo "<p> Your Consumer ESL: $consumerESL</p>";
     }
 }

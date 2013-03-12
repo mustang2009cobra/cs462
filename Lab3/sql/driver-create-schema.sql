@@ -40,7 +40,3 @@ CREATE TABLE `esls` (
 delimiter $$
 
 INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testdriver", "man", "testdriver", 1, "test")$$
-
-delimiter $$
-
-INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testowner", "man", "testowner", 0, "test")$$
