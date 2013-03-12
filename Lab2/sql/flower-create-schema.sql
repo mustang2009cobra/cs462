@@ -42,3 +42,10 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1$$
 
+delimiter $$
+
+INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testowner", "man", "testowner", 1, "test")$$
+
+delimiter $$
+
+INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testdriver", "man", "testdriver", 0, "test")$$
