@@ -29,7 +29,7 @@ CREATE TABLE `delivery_bids` (
 
 delimiter $$
 
-CREATE TABLE `ESLs` (
+CREATE TABLE `esls` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shopName` varchar(128) NOT NULL,
   `shopAddress` varchar(128) NOT NULL,
