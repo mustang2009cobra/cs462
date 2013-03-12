@@ -37,6 +37,7 @@ if($user){
 			<h2>Welcome!</h2>
 			<p>We've got some seriously good stuff going on here at our delivery driver website. To get started, just
             click the "Login" button at the top-right of the screen.</p>
+            <p>This is a test commit for the auto-deploy</p>
 		</div>
 		<div class="span2"></div>
 	</div>
