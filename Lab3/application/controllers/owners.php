@@ -4,24 +4,17 @@ class Owners extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('deliveryrequests_model');
+        $this->load->model('esls_model');
     }
 
-    public function registerESL(){
-        var_dump("JKER");
-        die();
-    }
-
-    /*
-    public function submitDeliveryRequest(){
-        $success = $this->deliveryrequests_model->create_delivery_request();
+    public function create_esl(){
+        $success = $this->esls_model->create_esl();
 
         if($success){
-            redirect(site_url('dashboard/main?error=false'), 'location');
+            redirect(site_url("dashboard/main?error=false"), 'location');
         }
         else{
-            redirect(site_url('dashboard/main?error=true'), 'location');
+            redirect(site_url("dasboard/main?error=true"), 'location');
         }
     }
-    */
 }

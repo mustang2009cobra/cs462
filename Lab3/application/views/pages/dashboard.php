@@ -118,11 +118,10 @@ function renderDriverDashboard($user){
     <h2>Welcome <?=$user->firstName?></h2>
     <h3>Welcome driver</h3>
     <?php echo validation_errors(); ?>
-    <?php echo form_open('owners/registerESL'); ?>
+    <?php echo form_open('owners/create_esl'); ?>
     <fieldset>
         <input type="text" name="shopName" placeholder="Shop Name"><br>
         <input type="text" name="shopAddress" placeholder="Shop Address"><br>
-        <input type="text" name="shopESL" placeholder="Shop ESL"><br>
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
     </fieldset>
     </form>

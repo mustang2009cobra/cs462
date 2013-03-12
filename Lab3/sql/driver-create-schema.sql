@@ -31,9 +31,9 @@ delimiter $$
 
 CREATE TABLE `ESLs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ownerId` int(11) NOT NULL,
-  `flowerShopName` varchar(128) NOT NULL,
-  `esl` varchar(256) NOT NULL,
+  `shopName` varchar(128) NOT NULL,
+  `shopAddress` varchar(128) NOT NULL,
+  `shopESL` varchar(256) NOT NULL,
   PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 
