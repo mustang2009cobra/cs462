@@ -106,6 +106,7 @@ function renderDriverDashboard($user, $esls){
     <fieldset>
         <input type="text" name="shopName" placeholder="Shop Name"><br>
         <input type="text" name="shopAddress" placeholder="Shop Address"><br>
+        <input type="text" name="shopESL" placeholder="Shop ESL"><br>
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
     </fieldset>
     </form>
@@ -116,9 +117,10 @@ function renderRegisteredESLs($esls){
     foreach($esls as $esl){
         echo "<h5>$esl->shopName</h5>";
         echo "<p> Address: $esl->shopAddress</p>";
+        echo "<p> Flower Shop ESL: $esl->shopESL</p>";
         $siteURL = site_url();
-        $shopESL = $siteURL . "/receive/" . $esl->id;
-        echo "<p> ESL: $shopESL</p>";
+        $consumerESL = $siteURL . "/receive/" . $esl->id;
+        echo "<p> Your Consumer ESL: $consumerESL</p>";
     }
 }
 
