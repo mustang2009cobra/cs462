@@ -116,7 +116,9 @@ function renderRegisteredESLs($esls){
     foreach($esls as $esl){
         echo "<h5>$esl->shopName</h5>";
         echo "<p> Address: $esl->shopAddress</p>";
-        echo "<p> ESL: $esl->shopESL</p>";
+        $siteURL = site_url();
+        $shopESL = $siteURL . "/receive/" . $esl->id;
+        echo "<p> ESL: $shopESL</p>";
     }
 }
 

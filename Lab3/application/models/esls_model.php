@@ -11,7 +11,6 @@ class Esls_model extends CI_Model {
         $data = array(
             'shopName' => $formData['shopName'],
             'shopAddress' => $formData['shopAddress'],
-            'shopESL' => 'something will go here'
         );
 
         $result = $this->db->insert('esls', $data);
