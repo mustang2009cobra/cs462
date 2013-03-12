@@ -117,8 +117,15 @@ function renderDriverDashboard($user){
     ?>
     <h2>Welcome <?=$user->firstName?></h2>
     <h3>Welcome driver</h3>
-    <p>You're the admin, here's what you can do:</p>
-    
+    <?php echo validation_errors(); ?>
+    <?php echo form_open('owners/registerESL'); ?>
+    <fieldset>
+        <input type="text" name="shopName" placeholder="Shop Name"><br>
+        <input type="text" name="shopAddress" placeholder="Shop Address"><br>
+        <input type="text" name="shopESL" placeholder="Shop ESL"><br>
+        <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
+    </fieldset>
+    </form>
     <?php
 }
 

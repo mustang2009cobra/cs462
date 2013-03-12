@@ -7,6 +7,12 @@ class Owners extends CI_Controller {
         $this->load->model('deliveryrequests_model');
     }
 
+    public function registerESL(){
+        var_dump("JKER");
+        die();
+    }
+
+    /*
     public function submitDeliveryRequest(){
         $success = $this->deliveryrequests_model->create_delivery_request();
 
@@ -17,5 +23,5 @@ class Owners extends CI_Controller {
             redirect(site_url('dashboard/main?error=true'), 'location');
         }
     }
-
+    */
 }
