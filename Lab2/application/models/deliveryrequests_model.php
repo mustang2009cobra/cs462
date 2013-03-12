@@ -13,6 +13,7 @@ class Deliveryrequests_model extends CI_Model {
             'shopName' => $formData['shopName'],
             'shopAddress' => $formData['shopAddress'],
             'deliveryAddress' => $formData['deliveryAddress'],
+            'pickupTime' => $formData['pickupTime'],
             'deliveryTime' => $formData['deliveryTime']
         );
 
@@ -40,6 +41,7 @@ class Deliveryrequests_model extends CI_Model {
                 "_name" => "delivery_ready",
                 "shopAddress" => $deliveryRequest['shopAddress'],
                 "deliveryAddress" => $deliveryRequest['deliveryAddress'],
+                "pickupTime" => $deliveryRequest['pickupTime'],
                 "deliveryTime" => $deliveryRequest['deliveryTime']
             );
             $this->signalESL($esl, $notificationData);
