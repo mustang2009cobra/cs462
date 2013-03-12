@@ -20,6 +20,25 @@ CREATE TABLE `users` (
 
 delimiter $$
 
+CREATE TABLE `delivery_bids` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `driverId` int(11) NOT NULL,
+  `bidAccepted` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
+CREATE TABLE `ESLs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ownerId` int(11) NOT NULL,
+  `flowerShopName` varchar(128) NOT NULL,
+  `esl` varchar(256) NOT NULL,
+  PRIMARY KEY(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
 INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testdriver", "man", "testdriver", 1, "test")$$
 
 delimiter $$

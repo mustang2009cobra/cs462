@@ -29,10 +29,10 @@ if(!$user){
         if(isset($_GET['error'])) {
             if($_GET['error'] == "true"){
                 if($user->admin){
-                    echo "ownererror";
+                    echo "drivererror";
                 }
                 else{
-                    echo "drivererror";
+                    echo "ownererror";
                 }
             }
             else{
@@ -59,10 +59,10 @@ if(!$user){
 		<div class="span2"></div>
 		<div class="span8">
             <?php if($user->admin) {
-                renderOwnerDashboard($user);
+                renderDriverDashboard($user);
             }
             else{
-                renderDriverDashboard($user);
+                renderOwnerDashboard($user);
             }?>
 		</div>
 		<div class="span2"></div>
@@ -73,13 +73,13 @@ if(!$user){
     $(document).ready(function(){
         var error = $("#error").html().trim();
         if(error == "drivererror"){
-            showErrorAlert("Error: Could not register ESL");
+            showErrorAlert("Error: Driver errors haven't yet been defined");
         }
         else if(error == "ownererror"){
-            showErrorAlert("Error: Could not create your delivery request");
+            showErrorAlert("Error: Owner errors haven't yet been defined");
         }
         else if(error == "noproblem"){
-            showSuccessAlert("Creation Successful!");
+            showSuccessAlert("Success!");
         }
     });
 
@@ -105,33 +105,20 @@ if(!$user){
 function renderOwnerDashboard($user){
     ?>
     <h2>Welcome <?=$user->firstName?></h2>
-    <h3>Submit a delivery request:</h3>
-    <?php echo validation_errors(); ?>
-    <?php echo form_open('owners/submitDeliveryRequest'); ?>
-    <fieldset>
-        <input type="text" name="shopName" placeholder="Shop Name"><br>
-        <input type="text" name="shopAddress" placeholder="Shop Address"><br>
-        <input type="text" name="deliveryAddress" placeholder="Delivery Address"><br>
-        <input type="text" name="deliveryTime" placeholder="Delivery Time"><br>
-        <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
-    </fieldset>
-    </form>
+    <h3>Welcome flower shop owner</h3>
+    <p>You're a guest here, here's what you can do:
+
+    </p>
+
     <?php
 }
 
 function renderDriverDashboard($user){
     ?>
     <h2>Welcome <?=$user->firstName?></h2>
-    <h3>Register your driver information with our service:</h3>
-    <?php echo validation_errors(); ?>
-    <?php echo form_open('drivers/registerURL'); ?>
-    <fieldset>
-        <input type="text" name="driverName" placeholder="Name"><br>
-        <input type="text" name="driverAddress" placeholder="Address"><br>
-        <input type="text" name="driverUrl" placeholder="Event Signal URL (ESL)"><br>
-        <button type="submit" name="createSubmit" class="btn btn-primary">Register</button>
-    </fieldset>
-    </form>
+    <h3>Welcome driver</h3>
+    <p>You're the admin, here's what you can do:</p>
+    
     <?php
 }
 
