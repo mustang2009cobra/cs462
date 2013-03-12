@@ -51,13 +51,6 @@ if(!$user){
 	<div class="row">
 		<div class="span2"></div>
 		<div class="span8">
-			<h1>User Dashboard</h1>
-		</div>
-		<div class="span2"></div>
-	</div>
-	<div class="row">
-		<div class="span2"></div>
-		<div class="span8">
             <?php if($user->admin) {
                 renderDriverDashboard($user);
             }
@@ -116,7 +109,9 @@ function renderOwnerDashboard($user){
 function renderDriverDashboard($user){
     ?>
     <h2>Welcome <?=$user->firstName?></h2>
-    <h3>Welcome driver</h3>
+    <h3>Registered ESLs:</h3>
+    <?php renderRegisteredESLs(); ?>
+    <h3>Register a new ESL:</h3>
     <?php echo validation_errors(); ?>
     <?php echo form_open('owners/create_esl'); ?>
     <fieldset>
@@ -126,6 +121,10 @@ function renderDriverDashboard($user){
     </fieldset>
     </form>
     <?php
+}
+
+function renderRegisteredESLs(){
+    echo "<p>No esls have currently been registered</p>";
 }
 
 ?>
