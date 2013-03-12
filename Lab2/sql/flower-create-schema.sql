@@ -25,6 +25,7 @@ CREATE TABLE `deliveryrequests` (
   `shopName` varchar(128) NOT NULL,
   `shopAddress` varchar(128) NOT NULL,
   `deliveryAddress` varchar(128) NOT NULL,
+  `pickupTime` varchar(128) NOT NULL,
   `deliveryTime` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1$$
