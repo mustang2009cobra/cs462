@@ -14,8 +14,14 @@ class Esls_model extends CI_Model {
             'shopESL' => 'something will go here'
         );
 
-        $result = $this->db->insert('ESLs', $data);
+        $result = $this->db->insert('esls', $data);
 
         return $result;
+    }
+
+    public function get_all_esls_for_driver(){
+        $query = $this->db->get('esls');
+
+        return $query->result();
     }
 }

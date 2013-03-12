@@ -52,7 +52,7 @@ if(!$user){
 		<div class="span2"></div>
 		<div class="span8">
             <?php if($user->admin) {
-                renderDriverDashboard($user);
+                renderDriverDashboard($user, $esls);
             }
             else{
                 renderOwnerDashboard($user);
@@ -94,23 +94,12 @@ if(!$user){
 </script>
 
 <?php
-//PAGE HELPER FUNCTIONS
-function renderOwnerDashboard($user){
-    ?>
-    <h2>Welcome <?=$user->firstName?></h2>
-    <h3>Welcome flower shop owner</h3>
-    <p>You're a guest here, here's what you can do:
 
-    </p>
-
-    <?php
-}
-
-function renderDriverDashboard($user){
+function renderDriverDashboard($user, $esls){
     ?>
     <h2>Welcome <?=$user->firstName?></h2>
     <h3>Registered ESLs:</h3>
-    <?php renderRegisteredESLs(); ?>
+    <?php renderRegisteredESLs($esls); ?>
     <h3>Register a new ESL:</h3>
     <?php echo validation_errors(); ?>
     <?php echo form_open('owners/create_esl'); ?>
@@ -123,8 +112,12 @@ function renderDriverDashboard($user){
     <?php
 }
 
-function renderRegisteredESLs(){
-    echo "<p>No esls have currently been registered</p>";
+function renderRegisteredESLs($esls){
+    foreach($esls as $esl){
+        echo "<h5>$esl->shopName</h5>";
+        echo "<p> Address: $esl->shopAddress</p>";
+        echo "<p> ESL: $esl->shopESL</p>";
+    }
 }
 
 ?>
