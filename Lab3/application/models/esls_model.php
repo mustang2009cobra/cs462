@@ -16,8 +16,6 @@ class Esls_model extends CI_Model {
 
         $query = $this->db->get_where('esls', array('shopPhoneNumber' => $formData['shopPhoneNumber']));
         if(count($query->result()) > 0){
-            var_dump("Exists");
-            die();
             $this->db->where('shopPhoneNumber', $formData['shopPhoneNumber']);
             $result = $this->db->update('esls', $data);
 
@@ -41,8 +39,6 @@ class Esls_model extends CI_Model {
 
         $query = $this->db->get_where('esls', array('shopPhoneNumber' => $formData['shopPhoneNumber']));
         if(count($query->result()) > 0){ //Driver has already registered the esl, just update the entry
-            var_dump("Exists");
-            die();
             $this->db->where('shopPhoneNumber', $formData['shopPhoneNumber']);
             $result = $this->db->update('esls', $data);
 

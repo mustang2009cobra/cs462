@@ -130,13 +130,15 @@ function renderFlowerOwnerDashboard($user){
 
 function renderRegisteredESLs($esls){
     foreach($esls as $esl){
-        echo "<h5>$esl->shopName</h5>";
-        echo "<p> Address: $esl->shopAddress</p>";
-        echo "<p> Shop Phone Number: $esl->shopPhoneNumber</p>";
-        echo "<p> Flower Shop ESL: $esl->shopESL</p>";
-        $siteURL = site_url();
-        $consumerESL = $siteURL . "/consumer/receive/" . $esl->id;
-        echo "<p> Your Consumer ESL: $consumerESL</p>";
+        if(isset($esl->shopName)){
+            echo "<h5>$esl->shopName</h5>";
+            echo "<p> Address: $esl->shopAddress</p>";
+            echo "<p> Shop Phone Number: $esl->shopPhoneNumber</p>";
+            echo "<p> Flower Shop's ESL: $esl->shopESL</p>";
+            $siteURL = site_url();
+            $consumerESL = $siteURL . "/consumer/receive/" . $esl->id;
+            echo "<p> Your Consumer ESL: $consumerESL</p>";
+        }
     }
 }
 
