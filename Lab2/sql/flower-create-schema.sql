@@ -24,6 +24,7 @@ CREATE TABLE `deliveryrequests` (
   `ownerId` int(11) NOT NULL,
   `shopName` varchar(128) NOT NULL,
   `shopAddress` varchar(128) NOT NULL,
+  `shopPhoneNumber` varchar(128) NOT NULL,
   `deliveryAddress` varchar(128) NOT NULL,
   `pickupTime` varchar(128) NOT NULL,
   `deliveryTime` varchar(128) NOT NULL,

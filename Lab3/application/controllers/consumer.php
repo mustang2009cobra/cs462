@@ -14,9 +14,12 @@ class Consumer extends CI_Controller {
         $domain = $formData['_domain'];
         $name = $formData['_name'];
         $shopAddress = $formData['shopAddress'];
+        $phoneNumber = $formData['shopPhoneNumber'];
         $deliveryAddress = $formData['deliveryAddress'];
         $pickupTime = $formData['pickupTime'];
         $deliveryTime = $formData['deliveryTime'];
+
+        file_put_contents('test.txt', $phoneNumber);
 
         $respondToEvent = true;
 

@@ -12,6 +12,7 @@ class Deliveryrequests_model extends CI_Model {
             'ownerId' => $this->session->userdata('user')->id,
             'shopName' => $formData['shopName'],
             'shopAddress' => $formData['shopAddress'],
+            'shopPhoneNumber' => $formData['shopPhoneNumber'],
             'deliveryAddress' => $formData['deliveryAddress'],
             'pickupTime' => $formData['pickupTime'],
             'deliveryTime' => $formData['deliveryTime']
@@ -40,6 +41,7 @@ class Deliveryrequests_model extends CI_Model {
                 "_domain" => "rfq",
                 "_name" => "delivery_ready",
                 "shopAddress" => $deliveryRequest['shopAddress'],
+                "shopPhoneNumber" => $deliveryRequest['shopPhoneNumber'],
                 "deliveryAddress" => $deliveryRequest['deliveryAddress'],
                 "pickupTime" => $deliveryRequest['pickupTime'],
                 "deliveryTime" => $deliveryRequest['deliveryTime']

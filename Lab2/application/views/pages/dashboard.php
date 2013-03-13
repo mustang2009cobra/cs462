@@ -111,6 +111,7 @@ function renderOwnerDashboard($user){
     <fieldset>
         <input type="text" name="shopName" placeholder="Shop Name"><br>
         <input type="text" name="shopAddress" placeholder="Shop Address"><br>
+        <input type="text" name="shopPhoneNumber" placeholder="Shop Phone Number"><br>
         <input type="text" name="deliveryAddress" placeholder="Delivery Address"><br>
         <input type="text" name="pickupTime" placeholder="Pickup Time"><br>
         <input type="text" name="deliveryTime" placeholder="Delivery Time"><br>

@@ -33,6 +33,7 @@ CREATE TABLE `esls` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shopName` varchar(128) NOT NULL,
   `shopAddress` varchar(128) NOT NULL,
+  `shopPhoneNumber` varchar(128) NOT NULL,
   `shopESL` varchar(256) NOT NULL,
   PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
