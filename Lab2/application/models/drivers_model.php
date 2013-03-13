@@ -20,4 +20,8 @@ class Drivers_model extends CI_Model {
         return $result;
     }
 
+    public function create_esl(){
+
+    }
+
 }

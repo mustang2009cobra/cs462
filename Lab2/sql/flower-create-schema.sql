@@ -10,10 +10,12 @@ delimiter $$
 
 CREATE TABLE `drivers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `driverId` int(11) NOT NULL,
-  `driverName` varchar(128) NOT NULL,
-  `driverAddress` varchar(128) NOT NULL,
-  `driverESL` varchar(128) NOT NULL,
+  `driverId` int(11),
+  `driverName` varchar(128),
+  `driverAddress` varchar(128),
+  `driverPhoneNumber` varchar(128) NOT NULL,
+  `shopESL` varchar(128),
+  `driverESL` varchar(128),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1$$
 
@@ -38,6 +40,7 @@ CREATE TABLE `deliverybids` (
   `deliveryRequestId` int(11) NOT NULL,
   `driverName` varchar(128) NOT NULL,
   `estimatedDeliveryTime` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1$$
 
 delimiter $$

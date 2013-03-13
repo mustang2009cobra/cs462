@@ -130,7 +130,8 @@ function renderDriverDashboard($user){
     <fieldset>
         <input type="text" name="driverName" placeholder="Name"><br>
         <input type="text" name="driverAddress" placeholder="Address"><br>
-        <input type="text" name="driverUrl" placeholder="Event Signal URL (ESL)"><br>
+        <input type="text" name="driverPhoneNumber" placeholder="Phone Number"><br>
+        <input type="text" name="driverESL" placeholder="Driver ESL"><br>
         <button type="submit" name="createSubmit" class="btn btn-primary">Register</button>
     </fieldset>
     </form>
