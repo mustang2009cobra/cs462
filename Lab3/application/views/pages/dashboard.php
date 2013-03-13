@@ -55,7 +55,7 @@ if(!$user){
                 renderDriverDashboard($user, $esls);
             }
             else{
-                renderOwnerDashboard($user);
+                renderFlowerOwnerDashboard($user);
             }?>
 		</div>
 		<div class="span2"></div>
@@ -98,14 +98,28 @@ if(!$user){
 function renderDriverDashboard($user, $esls){
     ?>
     <h2>Welcome <?=$user->firstName?></h2>
-    <h3>Registered ESLs:</h3>
+    <h3>Created ESLs:</h3>
     <?php renderRegisteredESLs($esls); ?>
-    <h3>Register a new ESL:</h3>
+    <h3>Create a new ESL:</h3>
     <?php echo validation_errors(); ?>
-    <?php echo form_open('owners/create_esl'); ?>
+    <?php echo form_open('drivers/create_esl'); ?>
     <fieldset>
         <input type="text" name="shopName" placeholder="Shop Name"><br>
         <input type="text" name="shopAddress" placeholder="Shop Address"><br>
+        <input type="text" name="shopPhoneNumber" placeholder="Shop Phone Number"><br>
+        <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
+    </fieldset>
+    </form>
+    <?php
+}
+
+function renderFlowerOwnerDashboard($user){
+    ?>
+    <h2>Welcome <?=$user->firstName?></h2>
+    <h3>Register your ESL with our site</h3>
+    <?php echo validation_errors(); ?>
+    <?php echo form_open('owners/register_esl'); ?>
+    <fieldset>
         <input type="text" name="shopPhoneNumber" placeholder="Shop Phone Number"><br>
         <input type="text" name="shopESL" placeholder="Shop ESL"><br>
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>

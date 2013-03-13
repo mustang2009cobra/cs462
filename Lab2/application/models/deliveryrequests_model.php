@@ -19,6 +19,7 @@ class Deliveryrequests_model extends CI_Model {
         );
 
         $result = $this->db->insert('deliveryrequests', $data);
+        $data['eventId'] = $this->db->insert_id(); //Get unique ID for the delivery request
 
         if($result){
             $this->signalAllESLs($data);
@@ -40,6 +41,7 @@ class Deliveryrequests_model extends CI_Model {
             $notificationData = array(
                 "_domain" => "rfq",
                 "_name" => "delivery_ready",
+                "eventId" => $deliveryRequest['eventId'],
                 "shopAddress" => $deliveryRequest['shopAddress'],
                 "shopPhoneNumber" => $deliveryRequest['shopPhoneNumber'],
                 "deliveryAddress" => $deliveryRequest['deliveryAddress'],

@@ -31,13 +31,17 @@ delimiter $$
 
 CREATE TABLE `esls` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `shopName` varchar(128) NOT NULL,
-  `shopAddress` varchar(128) NOT NULL,
+  `shopName` varchar(128),
+  `shopAddress` varchar(128),
   `shopPhoneNumber` varchar(128) NOT NULL,
-  `shopESL` varchar(256) NOT NULL,
+  `shopESL` varchar(256),
   PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 
 delimiter $$
 
 INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testdriver", "man", "testdriver", 1, "test")$$
+
+delimiter $$
+
+INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testowner", "man", "testowner", 0, "test")$$

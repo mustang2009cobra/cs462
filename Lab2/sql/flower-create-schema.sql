@@ -33,6 +33,15 @@ CREATE TABLE `deliveryrequests` (
 
 delimiter $$
 
+CREATE TABLE `deliverybids` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `deliveryRequestId` int(11) NOT NULL,
+  `driverName` varchar(128) NOT NULL,
+  `estimatedDeliveryTime` varchar(128) NOT NULL,
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(128) NOT NULL,
