@@ -154,7 +154,7 @@ function renderRegisteredESLs($esls){
         if(isset($esl->shopESL)){
             echo "<h5>$esl->driverName</h5>";
             echo "<p> Address: $esl->driverAddress</p>";
-            echo "<p> Shop Phone Number: $esl->driverPhoneNumber</p>";
+            echo "<p> Driver Phone Number: $esl->driverPhoneNumber</p>";
             $siteURL = site_url();
             $consumerESL = $siteURL . "/consumer/receive/" . $esl->id;
             echo "<p> Your consumer ESL: $consumerESL</p>";

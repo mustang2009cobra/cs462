@@ -12,14 +12,23 @@ class Consumer extends CI_Controller {
         $formData = $this->input->post(NULL, TRUE);
 
         //DATA THAT COMES FROM PRODUCERS
+        $data = array(
+            'deliveryRequestId' => $formData['deliveryRequestId'];
+            $driverName = $formData['driverName'];
+            $estimatedDeliveryTime = $formData['estimatedDeliveryTime'];
+        );
         $domain = $formData['_domain'];
         $name = $formData['_name'];
-        $deliveryRequestId = $formData['deliveryRequestId'];
-        $driverName = $formData['driverName'];
-        $estimatedDeliveryTime = $formData['estimatedDeliveryTime'];
+
 
         //Store bid in DB and exit
-        file_put_contents('test.txt', $driverName);
+
+    }
+
+    private function save_bid(){
+        $this->load->model('drivers_model');
+
+
     }
 
 }
