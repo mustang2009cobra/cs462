@@ -40,6 +40,7 @@ CREATE TABLE `deliverybids` (
   `deliveryRequestId` int(11) NOT NULL,
   `driverName` varchar(128) NOT NULL,
   `estimatedDeliveryTime` varchar(128) NOT NULL,
+  `accepted` tinyint(1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1$$
 

@@ -20,4 +20,21 @@ class Dashboard extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+    public function bids(){
+        $this->load->model('bids_model');
+        $this->load->model('deliveryrequests_model');
+
+        $bids = $this->bids_model->get_bids();
+        $deliveryRequests = $this->deliveryrequests_model->get_delivery_requests();
+
+        $data = array(
+            'bids' => $bids,
+            'deliveryRequests' => $deliveryRequests
+        );
+
+        $this->load->view('templates/header');
+        $this->load->view('pages/bids', $data);
+        $this->load->view('templates/footer');
+    }
+
 }

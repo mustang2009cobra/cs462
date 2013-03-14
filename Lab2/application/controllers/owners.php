@@ -29,4 +29,22 @@ class Owners extends CI_Controller {
         }
     }
 
+    public function accept_bid(){
+        $formData = $this->input->post(NULL, TRUE);
+
+        $bidId = $formData['bidId'];
+
+        $this->load->model('bids_model');
+        $success = $this->bids_model->set_bid_accepted($bidId);
+
+        if($success){
+            redirect(site_url('dashboard/bids?error=false'), 'location');
+        }
+        else{
+            redirect(site_url('dashboard/bids?error=true'), 'location');
+        }
+
+
+    }
+
 }

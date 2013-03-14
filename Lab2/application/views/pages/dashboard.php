@@ -129,6 +129,8 @@ function renderOwnerDashboard($user, $esls){
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
     </fieldset>
     </form>
+    <h3>Available Bids:</h3>
+    <a href="<?=site_url().'/dashboard/bids'?>" name="viewBids" id="viewBids">View Bids</a>
     <?php
 }
 

@@ -7,27 +7,24 @@ class Consumer extends CI_Controller {
      */
     public function receive(){
         $eslId = $this->uri->segment(3); //Get the flower shop ID
-        $this->load->model('esls_model');
 
         $formData = $this->input->post(NULL, TRUE);
 
-        //DATA THAT COMES FROM PRODUCERS
+        //Get data to store
         $data = array(
-            'deliveryRequestId' => $formData['deliveryRequestId'];
-            $driverName = $formData['driverName'];
-            $estimatedDeliveryTime = $formData['estimatedDeliveryTime'];
+            'deliveryRequestId' => $formData['deliveryRequestId'],
+            'driverName' => $formData['driverName'],
+            'estimatedDeliveryTime' => $formData['estimatedDeliveryTime']
         );
-        $domain = $formData['_domain'];
-        $name = $formData['_name'];
-
 
         //Store bid in DB and exit
-
+        $this->save_bid($data);
     }
 
-    private function save_bid(){
-        $this->load->model('drivers_model');
+    private function save_bid($data){
+        $this->load->model('bids_model');
 
+        $this->bids_model->new_bid($data);
 
     }
 
