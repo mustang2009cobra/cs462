@@ -18,4 +18,15 @@ class Drivers extends CI_Controller {
         }
     }
 
+    public function create_esl(){
+        $success = $this->drivers_model->create_esl();
+
+        if($success){
+            redirect(site_url('dashboard/main?error=false'), 'location');
+        }
+        else{
+            redirect(site_url('dashboard/main?error=true'), 'location');
+        }
+    }
+
 }

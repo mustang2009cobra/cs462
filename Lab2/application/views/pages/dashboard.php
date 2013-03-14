@@ -59,7 +59,7 @@ if(!$user){
 		<div class="span2"></div>
 		<div class="span8">
             <?php if($user->admin) {
-                renderOwnerDashboard($user);
+                renderOwnerDashboard($user, $esls);
             }
             else{
                 renderDriverDashboard($user);
@@ -102,9 +102,20 @@ if(!$user){
 
 <?php
 //PAGE HELPER FUNCTIONS
-function renderOwnerDashboard($user){
+function renderOwnerDashboard($user, $esls){
     ?>
     <h2>Welcome <?=$user->firstName?></h2>
+    <h3>Created ESLs:</h3>
+    <?php renderRegisteredESLs($esls); ?>
+    <h3>Create an ESL</h3>
+    <?php echo validation_errors(); ?>
+    <?php echo form_open('drivers/create_esl'); ?>
+    <fieldset>
+        <input type="text" name="driverName" placeholder="Driver Name"><br>
+        <input type="text" name="driverPhoneNumber" placeholder="Driver Phone Number"><br>
+        <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
+    </fieldset>
+    </form>
     <h3>Submit a delivery request:</h3>
     <?php echo validation_errors(); ?>
     <?php echo form_open('owners/submitDeliveryRequest'); ?>
@@ -136,6 +147,20 @@ function renderDriverDashboard($user){
     </fieldset>
     </form>
     <?php
+}
+
+function renderRegisteredESLs($esls){
+    foreach($esls as $esl){
+        if(isset($esl->shopESL)){
+            echo "<h5>$esl->driverName</h5>";
+            echo "<p> Address: $esl->driverAddress</p>";
+            echo "<p> Shop Phone Number: $esl->driverPhoneNumber</p>";
+            $siteURL = site_url();
+            $consumerESL = $siteURL . "/consumer/receive/" . $esl->id;
+            echo "<p> Your consumer ESL: $consumerESL</p>";
+            echo "<p> Driver's ESL: $esl->driverESL</p>";
+        }
+    }
 }
 
 ?>
