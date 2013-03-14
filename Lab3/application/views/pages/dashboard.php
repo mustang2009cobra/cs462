@@ -110,6 +110,19 @@ function renderDriverDashboard($user, $esls){
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
     </fieldset>
     </form>
+    <h3>Connected Apps</h3>
+    <?php echo validation_errors(); ?>
+    <?php echo form_open('drivers/connect_to_foursquare'); ?>
+    <fieldset>
+        <button type="submit" name="submitRequest" class="btn btn-primary">Connect To Foursquare</button>
+    </fieldset>
+    </form>
+    <?php echo validation_errors(); ?>
+    <?php echo form_open('drivers/connect_to_twilio'); ?>
+    <fieldset>
+        <button type="submit" name="submitRequest" class="btn btn-primary">Connect To Twilio</button>
+    </fieldset>
+    </form>
     <?php
 }
 
