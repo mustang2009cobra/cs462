@@ -37,6 +37,10 @@
 
 function renderAvailableBids($bids, $deliveryRequests){
 
+    if(count($deliveryRequests) == 0){
+        echo "<p>You haven't created any delivery requests yet</p>";
+    }
+
     foreach($deliveryRequests as $request){
         ?>
         <h3>Delivery Address: <?=$request->deliveryAddress?></h3>
