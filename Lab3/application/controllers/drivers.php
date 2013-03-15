@@ -20,7 +20,7 @@ class Drivers extends CI_Controller {
 
     public function connect_to_foursquare(){
         $foursquareURL = "https://foursquare.com/oauth2/authenticate?client_id=YVDRHKFFRL0LYQERSV1UKTWNXW2FLLUQUPCKA20R5KDWYUFD&response_type=code&redirect_uri=";
-        $foursquareURL .= site_url . "/consumer/foursquare";
+        $foursquareURL .= site_url() . "/consumer/foursquare";
         redirect($foursquareURL, 'location');
     }
 }
