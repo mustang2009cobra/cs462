@@ -57,9 +57,9 @@ class Consumer extends CI_Controller {
     }
 
     public function foursquarecheckin(){
-        $data = $this->input->get(NULL, TRUE);
+        $checkin = $this->input->post('checkin', TRUE);
 
-        file_put_contents('test.txt', $data);
+        file_put_contents('test.txt', $checkin);
     }
 
     public function twilio(){
