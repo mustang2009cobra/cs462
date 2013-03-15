@@ -21,7 +21,7 @@ curl_setopt($ch, CURLOPT_URL, "https://foursquare.com/oauth2/access_token?client
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));  
 $output = curl_exec($ch);
-curl_close($ch);  
+curl_close($ch);
 
 //SAVE ACCESS_TOKEN TO USERS DB
 $retData = json_decode($output);

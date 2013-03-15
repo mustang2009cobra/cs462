@@ -42,6 +42,19 @@ class Users_model extends CI_Model {
         }
 	}
 
+    public function set_foursquare_token($access_token){
+        $user = $this->session->userdata('user');
+
+        $data = array(
+            'foursquareToken' => $access_token
+        );
+
+        $this->db->where('id', $user->id);
+        $result = $this->db->update('users', $data);
+
+        return $result;
+    }
+
     private function set_user_session($user){
         $this->session->set_userdata('user', $user);
     }

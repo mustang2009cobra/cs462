@@ -15,6 +15,7 @@ CREATE TABLE `users` (
   `email` varchar(128) NOT NULL,
   `admin` tinyint(1) NOT NULL,
   `password` varchar(128) NOT NULL,
+  `foursquareToken` varchar(128),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 

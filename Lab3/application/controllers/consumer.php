@@ -49,10 +49,11 @@ class Consumer extends CI_Controller {
         $retData = json_decode($output);
         $access_token = $retData->{"access_token"};
 
-        file_put_contents("test.txt", $access_token);
-
         //SAVE ACCESS_TOKEN TO USERS DB
+        $this->load->model("users_model");
+        $this->users_model->set_foursquare_token($access_token);
 
+        redirect(site_url("dashboard/main?error=false"), 'location');
     }
 
     public function twilio(){
