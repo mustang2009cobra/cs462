@@ -63,7 +63,7 @@ class Consumer extends CI_Controller {
         $checkinData = array(
             'lat' => $checkin['venue']['location']['lat'],
             'lng' => $checkin['venue']['location']['lng'],
-            'checkinTime' => $checkin['createdAt']
+            'createTime' => $checkin['createdAt']
         );
 
         $this->load->model("checkins_model");
