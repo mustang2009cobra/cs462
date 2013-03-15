@@ -35,7 +35,24 @@ class Consumer extends CI_Controller {
     }
 
     public function foursquare(){
-        var_dump("Route for Foursquare events");
+        //GET FOURSQUARE CODE
+        $code = $this->input->get('code', TRUE);
+
+        //REQUEST ACCESS_TOKEN FROM FOURSQUARE
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://foursquare.com/oauth2/access_token?client_id=YVDRHKFFRL0LYQERSV1UKTWNXW2FLLUQUPCKA20R5KDWYUFD&client_secret=YZDMJEACOWFN5ECUQS43ENUK1HTQ2FXJEUMNZIEN4PPIDXXY&grant_type=authorization_code&redirect_uri=https://23.22.25.152/cs462/Lab3/index.php/consumer/foursquare&code=$code");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        $retData = json_decode($output);
+        $access_token = $retData->{"access_token"};
+
+        file_put_contents("test.txt", $access_token);
+
+        //SAVE ACCESS_TOKEN TO USERS DB
+
     }
 
     public function twilio(){
