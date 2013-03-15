@@ -101,29 +101,13 @@ function renderDriverDashboard($user, $esls){
     <h3>Created ESLs:</h3>
     <?php renderRegisteredESLs($esls); ?>
     <h3>Create a new ESL:</h3>
-    <?php echo validation_errors(); ?>
-    <?php echo form_open('drivers/create_esl'); ?>
-    <fieldset>
-        <input type="text" name="shopName" placeholder="Shop Name"><br>
-        <input type="text" name="shopAddress" placeholder="Shop Address"><br>
-        <input type="text" name="shopPhoneNumber" placeholder="Shop Phone Number"><br>
-        <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
-    </fieldset>
-    </form>
-    <h3>Connected Apps</h3>
-    <?php echo validation_errors(); ?>
-    <?php echo form_open('drivers/connect_to_foursquare'); ?>
-    <fieldset>
-        <button type="submit" name="submitRequest" class="btn btn-primary">Connect To Foursquare</button>
-    </fieldset>
-    </form>
-    <?php echo validation_errors(); ?>
-    <?php echo form_open('drivers/connect_to_twilio'); ?>
-    <fieldset>
-        <button type="submit" name="submitRequest" class="btn btn-primary">Connect To Twilio</button>
-    </fieldset>
-    </form>
     <?php
+    renderCreateESLSection()
+    ?>
+    <h3>Connected Apps</h3>
+    <?php
+    renderFoursquareSection();
+    renderTwilioSection();
 }
 
 function renderFlowerOwnerDashboard($user){
@@ -135,6 +119,20 @@ function renderFlowerOwnerDashboard($user){
     <fieldset>
         <input type="text" name="shopPhoneNumber" placeholder="Shop Phone Number"><br>
         <input type="text" name="shopESL" placeholder="Shop ESL"><br>
+        <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
+    </fieldset>
+    </form>
+    <?php
+}
+
+function renderCreateESLSection(){
+    echo validation_errors();
+    echo form_open('drivers/create_esl');
+    ?>
+    <fieldset>
+        <input type="text" name="shopName" placeholder="Shop Name"><br>
+        <input type="text" name="shopAddress" placeholder="Shop Address"><br>
+        <input type="text" name="shopPhoneNumber" placeholder="Shop Phone Number"><br>
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
     </fieldset>
     </form>
@@ -153,6 +151,28 @@ function renderRegisteredESLs($esls){
             echo "<p> Your Consumer ESL: $consumerESL</p>";
         }
     }
+}
+
+function renderFoursquareSection(){
+    echo validation_errors();
+    echo form_open('drivers/connect_to_foursquare');
+    ?>
+    <fieldset>
+        <button type="submit" name="submitRequest" class="btn btn-primary">Connect To Foursquare</button>
+    </fieldset>
+    </form>
+    <?php
+}
+
+function renderTwilioSection(){
+    echo validation_errors();
+    echo form_open('drivers/connect_to_twilio');
+    ?>
+    <fieldset>
+        <button type="submit" name="submitRequest" class="btn btn-primary">Connect To Twilio</button>
+    </fieldset>
+    </form>
+    <?php
 }
 
 ?>
