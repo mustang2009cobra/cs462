@@ -106,7 +106,7 @@ function renderDriverDashboard($user, $esls){
     ?>
     <h3>Connected Apps</h3>
     <?php
-    renderFoursquareSection();
+    renderFoursquareSection($user);
     renderTwilioSection();
 }
 
@@ -153,15 +153,20 @@ function renderRegisteredESLs($esls){
     }
 }
 
-function renderFoursquareSection(){
-    echo validation_errors();
-    echo form_open('drivers/connect_to_foursquare');
-    ?>
-    <fieldset>
-        <button type="submit" name="submitRequest" class="btn btn-primary">Connect To Foursquare</button>
-    </fieldset>
-    </form>
-    <?php
+function renderFoursquareSection($user){
+    if(isset($user->foursquareToken)){
+        echo "<p>You're connected to Foursquare!</p>";
+    }
+    else{
+        echo validation_errors();
+        echo form_open('drivers/connect_to_foursquare');
+        ?>
+        <fieldset>
+            <button type="submit" name="submitRequest" class="btn btn-primary">Connect To Foursquare</button>
+        </fieldset>
+        </form>
+        <?php
+    }
 }
 
 function renderTwilioSection(){
