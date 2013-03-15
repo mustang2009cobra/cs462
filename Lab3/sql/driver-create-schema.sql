@@ -21,6 +21,16 @@ CREATE TABLE `users` (
 
 delimiter $$
 
+CREATE TABLE `checkins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lat` varchar(128),
+  `lng` varchar(128),
+  `createTime` varchar(128),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
 CREATE TABLE `delivery_bids` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `driverId` int(11) NOT NULL,

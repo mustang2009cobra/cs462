@@ -57,9 +57,17 @@ class Consumer extends CI_Controller {
     }
 
     public function foursquarecheckin(){
-        $checkin = $this->input->post('checkin', TRUE);
+        $checkinRaw = $this->input->post('checkin', TRUE);
+        $checkin = json_decode($checkinRaw, TRUE);
 
-        file_put_contents('test.txt', $checkin);
+        $checkinData = array(
+            'lat' => $checkin['venue']['location']['lat'],
+            'lng' => $checkin['venue']['location']['lng'],
+            'checkinTime' => $checkin['createdAt']
+        );
+
+        $this->load->model("checkins_model");
+        $this->checkins_model->new_checkin($checkinData);
     }
 
     public function twilio(){
