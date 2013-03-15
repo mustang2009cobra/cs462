@@ -56,6 +56,12 @@ class Consumer extends CI_Controller {
         redirect(site_url("dashboard/main?error=false"), 'location');
     }
 
+    public function foursquarecheckin(){
+        $data = $this->input->get(NULL, TRUE);
+
+        file_put_contents('test.txt', $data);
+    }
+
     public function twilio(){
         var_dump("Route for Twilio events");
     }
