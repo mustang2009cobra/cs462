@@ -37,7 +37,7 @@ class Consumer extends CI_Controller {
         $checkinLng = $mostRecentCheckin->lng;
 
         //Get current address lat-long coordinates
-        $geocodeRequestUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" . $shopAddress . "&sensor=false";
+        $geocodeRequestUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($shopAddress) . "&sensor=false";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $geocodeRequestUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
