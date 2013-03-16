@@ -31,8 +31,24 @@ class Consumer extends CI_Controller {
                 $mostRecent = $checkin;
             }
         }
+        $checkinLat = $mostRecent['lat'];
+        $checkinLng = $mostRecent['lng'];
 
+        //Get current address lat-long coordinates
+        $geocodeRequestUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" . $shopAddress . "&sensor=false";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $geocodeRequestUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        $retData = json_decode($output, TRUE);
+        $shopAddrLat = $retData['results'][0]['geometry']['location']['lat'];
+        $shopAddrLng = $retData['results'][0]['geometry']['location']['lng'];
 
+        file_put_contents('checkinLat', $checkinLat);
+        file_put_contents('checkingLng', $checkingLng);
+        file_put_contents('shopAddrLat', $shopAddrLat);
+        file_put_contents('shopAddrLng', $shopAddrLng);
 
         if($respondToEvent){
             $shops = $this->esls_model->get_esl_by_phone_number($phoneNumber);
@@ -105,6 +121,37 @@ class Consumer extends CI_Controller {
             curl_close($ch);
         }
         return $result;
+    }
+
+    /**
+     * Thanks to http://chrishacia.com/2012/03/php-calculate-distance-between-2-longitude-latitude-points/ for this function
+     *
+     * @param $lat1
+     * @param $lon1
+     * @param $lat2
+     * @param $lon2
+     * @param $unit
+     * @return float
+     */
+    private function latLongDistance($lat1, $lon1, $lat2, $lon2, $unit) {
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+        $unit = strtoupper($unit);
+
+        if($unit == "K")
+        {
+            return ($miles * 1.609344);
+        }
+        elseif($unit == "N") {
+            return ($miles * 0.8684);
+        }
+        else
+        {
+            return $miles;
+        }
     }
 
 }
