@@ -22,7 +22,7 @@ class Consumer extends CI_Controller {
         $deliveryTime = $formData['deliveryTime'];
 
         //CHECK WHETHER TO RESPOND TO EVENT
-        $respondToEvent = true; //TODO - CHANGE TO FALSE LATER!!!!!
+        $respondToEvent = false;
         $this->load->model("checkins_model");
         $checkins = $this->checkins_model->get_checkins();
         $mostRecentCheckinTime = 0;
@@ -47,10 +47,13 @@ class Consumer extends CI_Controller {
         $shopAddrLat = $retData['results'][0]['geometry']['location']['lat'];
         $shopAddrLng = $retData['results'][0]['geometry']['location']['lng'];
 
-        file_put_contents('checkinLat', $checkinLat);
-        file_put_contents('checkingLng', $checkinLng);
-        file_put_contents('shopAddrLat', $shopAddrLat);
-        file_put_contents('shopAddrLng', $shopAddrLng);
+        $distance = $this->latLongDistance($shopAddrLat, $shopAddrLng, $checkinLat, $checkinLng, 'M');
+
+        file_put_contents('test.txt', $distance);
+
+        if($distance < 5){
+            $respondToEvent = true;
+        }
 
         if($respondToEvent){
             $shops = $this->esls_model->get_esl_by_phone_number($phoneNumber);
