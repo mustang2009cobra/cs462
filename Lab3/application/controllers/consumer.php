@@ -23,7 +23,16 @@ class Consumer extends CI_Controller {
 
         //CHECK WHETHER TO RESPOND TO EVENT
         $respondToEvent = true; //TODO - CHANGE TO FALSE LATER!!!!!
-        //Check here
+        $this->load->model("checkins_model");
+        $checkins = $this->checkins_model->get_checkins();
+        $mostRecent = 0;
+        foreach($checkins as $checkin){
+            if(intval($checkin->createTime) > $mostRecent){
+                $mostRecent = $checkin;
+            }
+        }
+
+
 
         if($respondToEvent){
             $shops = $this->esls_model->get_esl_by_phone_number($phoneNumber);

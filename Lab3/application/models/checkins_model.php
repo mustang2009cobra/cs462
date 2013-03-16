@@ -10,4 +10,10 @@ class Checkins_model extends CI_Model {
 
         return $result;
     }
+
+    public function get_checkins(){
+        $query = $this->db->get('checkins');
+
+        return $query->result();
+    }
 }
