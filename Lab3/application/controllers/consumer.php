@@ -33,8 +33,8 @@ class Consumer extends CI_Controller {
                 $mostRecentCheckinTime = $checkin->createTime;
             }
         }
-        $checkinLat = $mostRecentCheckin['lat'];
-        $checkinLng = $mostRecentCheckin['lng'];
+        $checkinLat = $mostRecentCheckin->lat;
+        $checkinLng = $mostRecentCheckin->lng;
 
         //Get current address lat-long coordinates
         $geocodeRequestUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" . $shopAddress . "&sensor=false";
@@ -48,7 +48,7 @@ class Consumer extends CI_Controller {
         $shopAddrLng = $retData['results'][0]['geometry']['location']['lng'];
 
         file_put_contents('checkinLat', $checkinLat);
-        file_put_contents('checkingLng', $checkingLng);
+        file_put_contents('checkingLng', $checkinLng);
         file_put_contents('shopAddrLat', $shopAddrLat);
         file_put_contents('shopAddrLng', $shopAddrLng);
 
