@@ -47,7 +47,7 @@ class Consumer extends CI_Controller {
         $shopAddrLat = $retData['results'][0]['geometry']['location']['lat'];
         $shopAddrLng = $retData['results'][0]['geometry']['location']['lng'];
 
-        $distance = $this->latLongDistance($shopAddrLat, $shopAddrLng, $checkinLat, $checkinLng, 'M');
+        $distance = $this->latLongDistance($shopAddrLat, $shopAddrLng, $checkinLat, $checkinLng);
 
         file_put_contents('test.txt', $distance);
 
@@ -82,6 +82,10 @@ class Consumer extends CI_Controller {
         //SAVE ACCESS_TOKEN TO USERS DB
         $this->load->model("users_model");
         $this->users_model->set_foursquare_token($access_token);
+
+        //Update logged in user
+        $user = $this->session->userdata('user');
+        $user->foursquareToken = $access_token;
 
         redirect(site_url("dashboard/main?error=false"), 'location');
     }
@@ -129,34 +133,24 @@ class Consumer extends CI_Controller {
     }
 
     /**
-     * Thanks to http://chrishacia.com/2012/03/php-calculate-distance-between-2-longitude-latitude-points/ for this function
-     *
-     * @param $lat1
-     * @param $lon1
-     * @param $lat2
-     * @param $lon2
-     * @param $unit
-     * @return float
+     * Thanks to http://snipplr.com/view/2531/
      */
-    private function latLongDistance($lat1, $lon1, $lat2, $lon2, $unit) {
-        $theta = $lon1 - $lon2;
-        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-        $dist = acos($dist);
-        $dist = rad2deg($dist);
-        $miles = $dist * 60 * 1.1515;
-        $unit = strtoupper($unit);
+    function latLongDistance($lat1, $lng1, $lat2, $lng2, $miles = true)
+    {
+        $pi80 = M_PI / 180;
+        $lat1 *= $pi80;
+        $lng1 *= $pi80;
+        $lat2 *= $pi80;
+        $lng2 *= $pi80;
 
-        if($unit == "K")
-        {
-            return ($miles * 1.609344);
-        }
-        elseif($unit == "N") {
-            return ($miles * 0.8684);
-        }
-        else
-        {
-            return $miles;
-        }
+        $r = 6372.797; // mean radius of Earth in km
+        $dlat = $lat2 - $lat1;
+        $dlng = $lng2 - $lng1;
+        $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat1) * cos($lat2) * sin($dlng / 2) * sin($dlng / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        $km = $r * $c;
+
+        return ($miles ? ($km * 0.621371192) : $km);
     }
 
 }
