@@ -25,14 +25,16 @@ class Consumer extends CI_Controller {
         $respondToEvent = true; //TODO - CHANGE TO FALSE LATER!!!!!
         $this->load->model("checkins_model");
         $checkins = $this->checkins_model->get_checkins();
-        $mostRecent = 0;
+        $mostRecentCheckinTime = 0;
+        $mostRecentCheckin = null;
         foreach($checkins as $checkin){
-            if(intval($checkin->createTime) > $mostRecent){
-                $mostRecent = $checkin;
+            if(intval($checkin->createTime) > $mostRecentCheckinTime){
+                $mostRecentCheckin = $checkin;
+                $mostRecentCheckinTime = $checkin->createTime;
             }
         }
-        $checkinLat = $mostRecent['lat'];
-        $checkinLng = $mostRecent['lng'];
+        $checkinLat = $mostRecentCheckin['lat'];
+        $checkinLng = $mostRecentCheckin['lng'];
 
         //Get current address lat-long coordinates
         $geocodeRequestUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" . $shopAddress . "&sensor=false";
