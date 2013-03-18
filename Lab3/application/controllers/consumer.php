@@ -74,6 +74,7 @@ class Consumer extends CI_Controller {
             );
 
             print $message->sid;
+            file_put_contents('initialsid.txt', $message->sid);
         }
     }
 
@@ -120,12 +121,14 @@ class Consumer extends CI_Controller {
     public function twilio(){
         $data = $this->input->post(NULL, TRUE);
 
-        $fileData = "";
-        foreach($data as $key => $item){
-            $fileData .= "Key: " . $key . " Value: " .$item . "\n\n";
-        }
-        file_put_contents("test.txt", $fileData);
+        $smsBody = $data['Body'];
+        $smsMessageSid = $data['SmsMessageSid'];
 
+        file_put_contents('replyMessageSid.txt', $smsMessageSid);
+
+        if($smsBody == "bid anyway"){
+            file_put_contents('goingToBid.txt', $smsBody);
+        }
     }
 
     private function signalBidAvailable($esl, $eventId){
