@@ -63,27 +63,32 @@ class Consumer extends CI_Controller {
             $respondToEvent = true;
         }
 
+        require("lib/twilio_api/Services/Twilio.php");
+        $sid = "AC88a8650a3a490968fe17acd081bac9b6";
+        $token = "3922168d36fe4ac1c6f1e6282ac5b18b";
+        $client = new Services_Twilio($sid, $token);
+
         if($respondToEvent){ //Auto-respond to event
             $shops = $this->esls_model->get_esl_by_phone_number($phoneNumber);
             foreach($shops as $shop){
                 $esl = $shop->shopESL;
                 $this->signalBidAvailable($esl, $eventId);
             }
-        }
-        else{ //Send text to driver
-            require("lib/twilio_api/Services/Twilio.php");
 
-            $sid = "AC88a8650a3a490968fe17acd081bac9b6";
-            $token = "3922168d36fe4ac1c6f1e6282ac5b18b";
-
-            $client = new Services_Twilio($sid, $token);
+            //Signal SMS that bid was made
             $message = $client->account->sms_messages->create(
                 '8014299756',
                 '8019219541',
-                'Hey Davo!'
+                "Bid automatically made"
             );
-
-            print $message->sid;
+        }
+        else{
+            //Signal that bid was not made
+            $message = $client->account->sms_messages->create(
+                '8014299756',
+                '8019219541',
+                "Bid not made, bid anyway?"
+            );
         }
     }
 
