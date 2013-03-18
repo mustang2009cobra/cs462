@@ -121,11 +121,11 @@ class Consumer extends CI_Controller {
         $data = $this->input->post(NULL, TRUE);
 
         $fileData = "";
-        foreach($data as $item){
-            $fileData .= $item . "\n\n";
+        foreach($data as $key => $item){
+            $fileData .= "Key: " . $key . " Value: " .$item . "\n\n";
         }
         file_put_contents("test.txt", $fileData);
-        
+
     }
 
     private function signalBidAvailable($esl, $eventId){
