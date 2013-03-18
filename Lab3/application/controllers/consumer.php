@@ -107,8 +107,7 @@ class Consumer extends CI_Controller {
         $this->users_model->set_foursquare_token($access_token);
 
         //Update logged in user
-        $user = $this->session->userdata('user');
-        $user->foursquareToken = $access_token;
+        $this->session->set_userdata('foursquareToken', $access_token);
 
         redirect(site_url("dashboard/main?error=false"), 'location');
     }
@@ -153,7 +152,7 @@ class Consumer extends CI_Controller {
             '_domain' => 'rfq',
             '_name' => 'bid_available',
             'deliveryRequestId' => $eventId,
-            'driverName' => 'Driver Joe',
+            'driverName' => 'Dave Woodruff',
             'estimatedDeliveryTime' => '15 minutes'
         );
 
