@@ -136,7 +136,7 @@ class Consumer extends CI_Controller {
         if($smsBody == "bid anyway"){
             $this->load->model('deliveryrequests_model');
             $delivery_request = $this->deliveryrequests_model->get_most_recent_delivery_request();
-            file_put_contents('receiveTime.txt', $deliveryRequest->createTime);
+            file_put_contents('receiveTime.txt', $delivery_request->createTime);
             //Get the last bid request and respond to the bid
         }
     }
