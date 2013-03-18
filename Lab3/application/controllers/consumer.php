@@ -84,7 +84,6 @@ class Consumer extends CI_Controller {
             );
 
             print $message->sid;
-            file_put_contents('initialsid.txt', $message->sid);
         }
     }
 
@@ -135,9 +134,17 @@ class Consumer extends CI_Controller {
 
         if($smsBody == "bid anyway"){
             $this->load->model('deliveryrequests_model');
+            $this->load->model('esls_model');
+
+            //Get the last delivery request
             $delivery_request = $this->deliveryrequests_model->get_most_recent_delivery_request();
-            file_put_contents('receiveTime.txt', $delivery_request->createTime);
-            //Get the last bid request and respond to the bid
+
+            //Signal the shops for a bid
+            $shops = $this->esls_model->get_esl_by_phone_number($delivery_request->shopPhoneNumber);
+            foreach($shops as $shop){
+                $esl = $shop->shopESL;
+                $this->signalBidAvailable($esl, $delivery_request->eventId);
+            }
         }
     }
 
