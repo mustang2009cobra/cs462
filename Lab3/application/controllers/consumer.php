@@ -49,18 +49,31 @@ class Consumer extends CI_Controller {
 
         $distance = $this->latLongDistance($shopAddrLat, $shopAddrLng, $checkinLat, $checkinLng);
 
-        file_put_contents('test.txt', $distance);
-
         if($distance < 5){
             $respondToEvent = true;
         }
 
-        if($respondToEvent){
+        if($respondToEvent){ //Auto-respond to event
             $shops = $this->esls_model->get_esl_by_phone_number($phoneNumber);
             foreach($shops as $shop){
                 $esl = $shop->shopESL;
                 $this->signalBidAvailable($esl, $eventId);
             }
+        }
+        else{ //Send text to driver
+            require("lib/twilio_api/Services/Twilio.php");
+
+            $sid = "AC88a8650a3a490968fe17acd081bac9b6";
+            $token = "3922168d36fe4ac1c6f1e6282ac5b18b";
+
+            $client = new Services_Twilio($sid, $token);
+            $message = $client->account->sms_messages->create(
+                '8014299756',
+                '8019219541',
+                'Hey Davo!'
+            );
+
+            print $message->sid;
         }
     }
 
@@ -105,7 +118,14 @@ class Consumer extends CI_Controller {
     }
 
     public function twilio(){
-        var_dump("Route for Twilio events");
+        $data = $this->input->post(NULL, TRUE);
+
+        $fileData = "";
+        foreach($data as $item){
+            $fileData .= $item . "\n\n";
+        }
+        file_put_contents("test.txt", $fileData);
+        
     }
 
     private function signalBidAvailable($esl, $eventId){
