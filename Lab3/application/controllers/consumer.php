@@ -21,6 +21,16 @@ class Consumer extends CI_Controller {
         $pickupTime = $formData['pickupTime'];
         $deliveryTime = $formData['deliveryTime'];
 
+        //SAVE DELIVERY BID TO DB
+        $deliveryBidData = array(
+            'shopPhoneNumber' => $phoneNumber,
+            'eventId' => $eventId,
+            'shopAddress' => $shopAddress,
+            'receiveTime' => time()
+        );
+        $this->load->model('deliveryrequests_model');
+        $this->deliveryrequests_model->new_request($deliveryBidData);
+
         //CHECK WHETHER TO RESPOND TO EVENT
         $respondToEvent = false;
         $this->load->model("checkins_model");
@@ -122,12 +132,12 @@ class Consumer extends CI_Controller {
         $data = $this->input->post(NULL, TRUE);
 
         $smsBody = $data['Body'];
-        $smsMessageSid = $data['SmsMessageSid'];
-
-        file_put_contents('replyMessageSid.txt', $smsMessageSid);
 
         if($smsBody == "bid anyway"){
-            file_put_contents('goingToBid.txt', $smsBody);
+            $this->load->model('deliveryrequests_model');
+            $delivery_request = $this->deliveryrequests_model->get_most_recent_delivery_request();
+            file_put_contents('receiveTime.txt', $deliveryRequest->createTime);
+            //Get the last bid request and respond to the bid
         }
     }
 

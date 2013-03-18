@@ -31,10 +31,12 @@ CREATE TABLE `checkins` (
 
 delimiter $$
 
-CREATE TABLE `delivery_bids` (
+CREATE TABLE `delivery_requests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `driverId` int(11) NOT NULL,
-  `bidAccepted` tinyint(1) NOT NULL,
+  `receiveTime` int(11) NOT NULL,
+  `eventId` varchar(128) NOT NULL,
+  `shopPhoneNumber` varchar(128) NOT NULL,
+  `shopAddress` varchar(128),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 
