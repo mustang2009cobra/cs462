@@ -1,10 +1,3 @@
-<?php
-$user = $this->session->userdata('user');
-if($user){
-    redirect(site_url('dashboard/main'), 'location');
-}
-?>
-
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
 	<div class="container">
@@ -16,7 +9,7 @@ if($user){
 	  <a class="brand" href="<?= site_url('/home/view'); ?>">Drivers Guild</a>
 	  <div class="nav-collapse collapse">
 		<ul class="nav pull-right">
-		  <li><a href="<?= site_url('/home/login'); ?>">Register</a></li>
+		  <li><a href="<?= site_url('/home/register'); ?>">Register</a></li>
 		</ul>
 	  </div><!--/.nav-collapse -->
 	</div>

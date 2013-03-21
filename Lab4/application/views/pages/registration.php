@@ -1,10 +1,3 @@
-<?php
-$user = $this->session->userdata('user');
-if(!$user){
-    redirect(site_url('home/view'), 'location');
-}
-
-?>
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
 	<div class="container">

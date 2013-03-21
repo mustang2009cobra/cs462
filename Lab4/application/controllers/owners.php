@@ -4,7 +4,7 @@ class Owners extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        //Load appropriate model here
+        $this->load->model("owners_model");
     }
 
     public function register(){

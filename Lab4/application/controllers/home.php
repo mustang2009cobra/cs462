@@ -22,18 +22,9 @@ class Home extends CI_Controller {
 	/**
 	 * Render the login page
 	 */
-	public function login(){
+	public function register(){
 		$this->load->view('templates/header');
-		$this->load->view('pages/login');
-		$this->load->view('templates/footer');
-	}
-	
-	/**
-	 * Logout, then redirect back to the home page
-	 */
-	public function logout(){
-		$this->load->view('templates/header');
-		$this->load->view('pages/home');
+		$this->load->view('pages/register');
 		$this->load->view('templates/footer');
 	}
 }
