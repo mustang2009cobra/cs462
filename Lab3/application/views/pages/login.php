@@ -10,7 +10,7 @@
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	  </a>
-	  <a class="brand" href="<?= site_url('/home/view'); ?>">Flower Shop</a>
+	  <a class="brand" href="<?= site_url('/home/view'); ?>">Drivers Site</a>
 	</div>
   </div>
 </div>

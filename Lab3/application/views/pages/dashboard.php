@@ -13,7 +13,7 @@ if(!$user){
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	  </a>
-	  <a class="brand" href="<?= site_url('/home/view'); ?>">Flower Shop</a>
+	  <a class="brand" href="<?= site_url('/home/view'); ?>">Drivers Site</a>
 	  <div class="nav-collapse collapse">
 		<ul class="nav pull-right">
 		  <li><a href="<?= site_url('/users/logout'); ?>">Logout</a></li>
