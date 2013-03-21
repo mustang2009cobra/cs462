@@ -4,28 +4,36 @@ CREATE DATABASE `guild` /*!40100 DEFAULT CHARACTER SET latin1 */$$
 
 delimiter $$
 
-use `driver_site`$$
+use `guild`$$
 
 delimiter $$
 
-CREATE TABLE `users` (
+CREATE TABLE `flower_shops` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(128) NOT NULL,
-  `lastName` varchar(128) NOT NULL,
-  `email` varchar(128) NOT NULL,
-  `admin` tinyint(1) NOT NULL,
+  `shopUsername` varchar(128) NOT NULL,
+  `shopName` varchar(128) NOT NULL,
+  `shopPhoneNumber` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `foursquareToken` varchar(128),
+  `shopESL` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 
 delimiter $$
 
-CREATE TABLE `checkins` (
+CREATE TABLE `drivers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lat` varchar(128),
-  `lng` varchar(128),
-  `createTime` varchar(128),
+  `driverUsername` varchar(128) NOT NULL,
+  `driverName` varchar(128) NOT NULL,
+  `driverPhoneNumber` varchar(128) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `driverESL` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
+CREATE TABLE `bids_awarded` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 
@@ -42,19 +50,14 @@ CREATE TABLE `delivery_requests` (
 
 delimiter $$
 
-CREATE TABLE `esls` (
+CREATE TABLE `deliveries_picked_up` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `shopName` varchar(128),
-  `shopAddress` varchar(128),
-  `shopPhoneNumber` varchar(128) NOT NULL,
-  `shopESL` varchar(256),
-  PRIMARY KEY(`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 
 delimiter $$
 
-INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testdriver", "man", "testdriver", 1, "test")$$
-
-delimiter $$
-
-INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testowner", "man", "testowner", 0, "test")$$
+CREATE TABLE `deliveries_complete` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$

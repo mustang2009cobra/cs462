@@ -16,7 +16,7 @@ if($user){
 	  <a class="brand" href="<?= site_url('/home/view'); ?>">Drivers Guild</a>
 	  <div class="nav-collapse collapse">
 		<ul class="nav pull-right">
-		  <li><a href="<?= site_url('/home/login'); ?>">Login</a></li>
+		  <li><a href="<?= site_url('/home/login'); ?>">Register</a></li>
 		</ul>
 	  </div><!--/.nav-collapse -->
 	</div>

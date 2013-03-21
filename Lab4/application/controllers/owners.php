@@ -4,17 +4,10 @@ class Owners extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('esls_model');
+        //Load appropriate model here
     }
 
-    public function register_esl(){
-        $success = $this->esls_model->register_owner_esl();
-
-        if($success){
-            redirect(site_url("dashboard/main?error=false"), 'location');
-        }
-        else{
-            redirect(site_url("dasboard/main?error=true"), 'location');
-        }
+    public function register(){
+        redirect(site_url("registration/view"), 'location');
     }
 }

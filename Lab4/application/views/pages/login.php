@@ -26,29 +26,41 @@
         </div>
         <div class="span2"></div>
     </div>
+    <div class="row">
+        <div class="span2"></div>
+        <div class="span8">
+            <h2>Register Here</h2>
+            <p>Flower Shops and Drivers register using the respective forms below:</p>
+        </div>
+        <div class="span2"></div>
+    </div>
 	<div class="row">
 		<div class="span2"></div>
 		<div class="span4">
-			<h2>Login</h2>
+			<h4>Flower Shops</h4>
 			<?php echo validation_errors(); ?>
-			<?php echo form_open('users/login'); ?>
+			<?php echo form_open('owners/register'); ?>
 			<fieldset>
-				<input type="text" name="loginUserEmail" placeholder="Email">
-				<input type="password" name="loginUserPassword" placeholder="Password"> <br />
-				<button id="login" class="btn btn-primary">Login</button>
+                <input type="text" name="shopName" placeholder="Shop Name">
+                <input type="text" name="shopPhoneNumber" placeholder="Shop Phone Number">
+				<input type="text" name="shopUsername" placeholder="Username">
+                <input type="password" name="shopPassword" placeholder="Password">
+                <input type="text" name="shopESL" placeholder="Shop ESL"><br />
+				<button id="login" class="btn btn-primary">Register</button>
 			</fieldset>
 			</form>
 		</div>
 		<div class="span4">
-			<h2>...Or create an account</h2>
+			<h4>Drivers</h4>
 			<?php echo validation_errors(); ?>
-			<?php echo form_open('users/create'); ?>
+			<?php echo form_open('drivers/register'); ?>
 				<fieldset>
-					<input type="text" name="createUserFirstName" placeholder="First Name">
-					<input type="text" name="createUserLastName" placeholder="Last Name">
-					<input type="text" name="createUserEmail" placeholder="Email Address">
-					<input type="password" name="createUserPassword" placeholder="Password"><br />
-					<button type="submit" name="createSubmit" class="btn btn-primary">Create Account</button>
+					<input type="text" name="driverName" placeholder="Driver Name">
+					<input type="text" name="driverPhoneNumber" placeholder="Driver Phone Number">
+					<input type="text" name="driverUsername" placeholder="Username">
+					<input type="password" name="driverPassword" placeholder="Password">
+                    <input type="text" name="driverESL" placeholder="Driver ESL"><br />
+					<button type="submit" name="createSubmit" class="btn btn-primary">Register</button>
 				</fieldset>
 			</form>
 		</div>
