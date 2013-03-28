@@ -11,7 +11,7 @@ class Consumer extends CI_Controller {
         $formData =$this->input->post(NULL, TRUE);
 
         $domain = $formData['_domain'];
-        $name = $formData['_nane'];
+        $name = $formData['_name'];
 
         if($name === "complete"){
             //Save to deliveries_complete table
