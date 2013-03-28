@@ -25,7 +25,7 @@ class Consumer extends CI_Controller {
             $this->save_bid($data);
         }
         else if($name === "delivery_complete"){
-            //Save to DB
+            
         }
     }
 

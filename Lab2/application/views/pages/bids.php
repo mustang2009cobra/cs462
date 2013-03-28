@@ -62,6 +62,14 @@ function renderAvailableBids($bids, $deliveryRequests){
 
             if(isset($acceptedBid)){
                 echo $acceptedBid->driverName . " has been chosen for this delivery";
+                echo validation_errors();
+                echo form_open('owners/bid_picked_up'); ?>
+                <fieldset>
+                    <input type="text" style="display:none;" name="deliveryRequestId" value="<?=$request->id?>"><br>
+                    <button type="submit" name="createSubmit" class="btn btn-primary">Set Request Picked-Up</button>
+                </fieldset>
+                </form>
+                <?php
             }
             else{
                 $noBids = true;

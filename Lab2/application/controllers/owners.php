@@ -37,14 +37,37 @@ class Owners extends CI_Controller {
         $this->load->model('bids_model');
         $success = $this->bids_model->set_bid_accepted($bidId);
 
+        //TODO - Send the bid_awarded event
+            //Data needed
+                //Driver phone number
+
         if($success){
             redirect(site_url('dashboard/bids?error=false'), 'location');
         }
         else{
             redirect(site_url('dashboard/bids?error=true'), 'location');
         }
+    }
 
+    public function bid_picked_up(){
+        var_dump("KLS");
+        //Signal that the bid was picked up
+    }
 
+    private function signalESL($esl, $data){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            print curl_error($ch);
+        } else {
+            curl_close($ch);
+        }
+        return $result;
     }
 
 }
