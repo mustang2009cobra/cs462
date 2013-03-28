@@ -19,8 +19,22 @@ class Consumer extends CI_Controller {
             //Forward on to flower_shop
         }
         else if($name === "bid_available"){
-            //Just forward the bid to the flower shop using the phone number and the ESL we have for them
+            $data = array(
+                '_domain' => "rfq",
+                '_name' => "bid_available",
+                'deliveryRequestId' => $formData['deliveryRequestId'],
+                'driverName' => $formData['driverName'],
+                'estimatedDeliveryTime' => $formData['estimatedDeliveryTime']
+            );
 
+            //Find shop ESL
+            $shopPhoneNumber = $formData['shopPhoneNumber'];
+            $this->load->model('owners_model');
+            $shops = $this->owners_model->get_owners_by_phone_number($shopPhoneNumber);
+            foreach($shops as $shop){
+                $esl = $shop->shopESL;
+                $this->signalESL($esl, $data);
+            }
         }
     }
 

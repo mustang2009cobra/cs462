@@ -80,7 +80,7 @@ class Consumer extends CI_Controller {
             $shops = $this->esls_model->get_esl_by_phone_number($delivery_request->shopPhoneNumber);
             foreach($shops as $shop){
                 $esl = $shop->shopESL;
-                $this->signalBidAvailable($esl, $delivery_request->eventId);
+                $this->signalBidAvailable($esl, $delivery_request->eventId, $delivery_request->shopPhoneNumber);
             }
         }
     }
@@ -148,7 +148,7 @@ class Consumer extends CI_Controller {
             $shops = $this->esls_model->get_esl_by_phone_number($phoneNumber);
             foreach($shops as $shop){
                 $esl = $shop->shopESL;
-                $this->signalBidAvailable($esl, $eventId);
+                $this->signalBidAvailable($esl, $eventId, $phoneNumber);
             }
 
             //Signal SMS that bid was made
@@ -168,10 +168,11 @@ class Consumer extends CI_Controller {
         }
     }
 
-    private function signalBidAvailable($esl, $eventId){
+    private function signalBidAvailable($esl, $eventId, $phoneNumber){
         $data = array(
             '_domain' => 'rfq',
             '_name' => 'bid_available',
+            'shopPhoneNumber' => $phoneNumber,
             'deliveryRequestId' => $eventId,
             'driverName' => 'Dave Woodruff',
             'estimatedDeliveryTime' => '15 minutes'

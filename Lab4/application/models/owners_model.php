@@ -19,4 +19,10 @@ class Owners_model extends CI_Model {
         $success = $this->db->insert('flower_shops', $data);
         return $this->db->insert_id();
     }
+
+    public function get_owners_by_phone_number($phoneNumber){
+        $query = $this->db->get_where('flower_shops', array('shopPhoneNumber' => $phoneNumber));
+
+        return $query->result();
+    }
 }
