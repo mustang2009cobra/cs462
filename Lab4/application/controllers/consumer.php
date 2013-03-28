@@ -50,7 +50,7 @@ class Consumer extends CI_Controller {
             $phoneNumber = $formData['shopPhoneNumber'];
 
             //Save to DB
-            $this->load->model("deliveryrequest_model");
+            $this->load->model("deliveryrequests_model");
             $deliveryBidData = array(
                 'shopPhoneNumber' => $phoneNumber,
                 'eventId' => $eventId,
