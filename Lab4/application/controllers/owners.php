@@ -8,6 +8,13 @@ class Owners extends CI_Controller {
     }
 
     public function register(){
-        redirect(site_url("registration/view"), 'location');
+        $success = $this->owners_model->register_owner();
+
+        if(isset($success)){
+            redirect(site_url("registration/view/owner/$success"), 'location');
+        }
+        else{
+            redirect(site_url("home/register"), 'location');
+        }
     }
 }

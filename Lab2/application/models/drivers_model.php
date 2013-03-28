@@ -11,7 +11,6 @@ class Drivers_model extends CI_Model {
         $data = array(
             'driverId' => $this->session->userdata('user')->id,
             'driverName' => $formData['driverName'],
-            'driverAddress' => $formData['driverAddress'],
             'driverPhoneNumber' => $formData['driverPhoneNumber'],
             'driverESL' => $formData['driverESL']
         );

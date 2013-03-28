@@ -12,7 +12,6 @@ CREATE TABLE `drivers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `driverId` int(11),
   `driverName` varchar(128),
-  `driverAddress` varchar(128),
   `driverPhoneNumber` varchar(128) NOT NULL,
   `shopESL` varchar(128),
   `driverESL` varchar(128),
@@ -62,4 +61,4 @@ INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testo
 
 delimiter $$
 
-INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testdriver", "man", "testdriver", 0, "test")$$
+INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testguild", "man", "testguild", 0, "test")$$

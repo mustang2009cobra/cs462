@@ -8,6 +8,13 @@ class Drivers extends CI_Controller {
     }
 
     public function register(){
-        redirect(site_url("registration/view"), 'location');
+        $success = $this->drivers_model->register_driver();
+
+        if(isset($success)){
+            redirect(site_url("registration/view/driver/$success"), 'location');
+        }
+        else{
+            redirect(site_url("home/register"), 'location');
+        }
     }
 }

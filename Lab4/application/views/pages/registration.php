@@ -15,7 +15,16 @@
 	<div class="row">
 		<div class="span2"></div>
 		<div class="span8">
-            <p>Registration stuff goes here</p>
+            <h3>Thank You!</h3>
+            <?php
+            if($eslType === 'driver'){
+                echo "<p>We've registered your driver information with our site</p>";
+            }
+            else{ //Owner
+                echo "<p>We've registered your owner information with our site</p>";
+            }
+            echo "<p>Your generated ESL for this site is $esl";
+            ?>
 		</div>
 		<div class="span2"></div>
 	</div>

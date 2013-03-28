@@ -111,8 +111,8 @@ function renderOwnerDashboard($user, $esls){
     <?php echo validation_errors(); ?>
     <?php echo form_open('drivers/create_esl'); ?>
     <fieldset>
-        <input type="text" name="driverName" placeholder="Driver Name"><br>
-        <input type="text" name="driverPhoneNumber" placeholder="Driver Phone Number"><br>
+        <input type="text" name="driverName" placeholder="Guild Name"><br>
+        <input type="text" name="driverPhoneNumber" placeholder="Phone Number"><br>
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
     </fieldset>
     </form>
@@ -137,14 +137,13 @@ function renderOwnerDashboard($user, $esls){
 function renderDriverDashboard($user){
     ?>
     <h2>Welcome <?=$user->firstName?></h2>
-    <h3>Register your driver information with our service:</h3>
+    <h3>Register your guild information with our service:</h3>
     <?php echo validation_errors(); ?>
     <?php echo form_open('drivers/registerURL'); ?>
     <fieldset>
         <input type="text" name="driverName" placeholder="Name"><br>
-        <input type="text" name="driverAddress" placeholder="Address"><br>
         <input type="text" name="driverPhoneNumber" placeholder="Phone Number"><br>
-        <input type="text" name="driverESL" placeholder="Driver ESL"><br>
+        <input type="text" name="driverESL" placeholder="Guild ESL"><br>
         <button type="submit" name="createSubmit" class="btn btn-primary">Register</button>
     </fieldset>
     </form>
@@ -155,12 +154,11 @@ function renderRegisteredESLs($esls){
     foreach($esls as $esl){
         if(isset($esl->shopESL)){
             echo "<h5>$esl->driverName</h5>";
-            echo "<p> Address: $esl->driverAddress</p>";
-            echo "<p> Driver Phone Number: $esl->driverPhoneNumber</p>";
+            echo "<p> Phone Number: $esl->driverPhoneNumber</p>";
             $siteURL = site_url();
             $consumerESL = $siteURL . "/consumer/receive/" . $esl->id;
             echo "<p> Your consumer ESL: $consumerESL</p>";
-            echo "<p> Driver's ESL: $esl->driverESL</p>";
+            echo "<p> Guild's ESL: $esl->driverESL</p>";
         }
     }
 }
