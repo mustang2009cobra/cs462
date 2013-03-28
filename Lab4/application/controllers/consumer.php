@@ -85,6 +85,7 @@ class Consumer extends CI_Controller {
                     "eventId" => $formData['eventId'],
                     "shopAddress" => $formData['shopAddress'],
                     "shopPhoneNumber" => $formData['shopPhoneNumber'],
+                    "guildPhoneNumber" => "801-111-1111", //Bad temporary fix
                     "deliveryAddress" => $formData['deliveryAddress'],
                     "pickupTime" => $formData['pickupTime'],
                     "deliveryTime" => $formData['deliveryTime']

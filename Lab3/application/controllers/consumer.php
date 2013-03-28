@@ -77,7 +77,7 @@ class Consumer extends CI_Controller {
             $delivery_request = $this->deliveryrequests_model->get_most_recent_delivery_request();
 
             //Signal the shops for a bid
-            $shops = $this->esls_model->get_esl_by_phone_number($delivery_request->shopPhoneNumber);
+            $shops = $this->esls_model->get_esl_by_phone_number($delivery_request->guildPhoneNumber);
             foreach($shops as $shop){
                 $esl = $shop->shopESL;
                 $this->signalBidAvailable($esl, $delivery_request->eventId, $delivery_request->shopPhoneNumber);
@@ -93,6 +93,7 @@ class Consumer extends CI_Controller {
         $eventId = $formData['eventId'];
         $shopAddress = $formData['shopAddress'];
         $phoneNumber = $formData['shopPhoneNumber'];
+        $guildPhoneNumber = $formData['guildPhoneNumber'];
         $deliveryAddress = $formData['deliveryAddress'];
         $pickupTime = $formData['pickupTime'];
         $deliveryTime = $formData['deliveryTime'];
@@ -100,6 +101,7 @@ class Consumer extends CI_Controller {
         //SAVE DELIVERY BID TO DB
         $deliveryBidData = array(
             'shopPhoneNumber' => $phoneNumber,
+            'guildPhoneNumber' => $guildPhoneNumber,
             'eventId' => $eventId,
             'shopAddress' => $shopAddress,
             'receiveTime' => time()
@@ -145,7 +147,7 @@ class Consumer extends CI_Controller {
         $client = new Services_Twilio($sid, $token);
 
         if($respondToEvent){ //Auto-respond to event
-            $shops = $this->esls_model->get_esl_by_phone_number($phoneNumber);
+            $shops = $this->esls_model->get_esl_by_phone_number($guildPhoneNumber);
             foreach($shops as $shop){
                 $esl = $shop->shopESL;
                 $this->signalBidAvailable($esl, $eventId, $phoneNumber);

@@ -36,6 +36,7 @@ CREATE TABLE `delivery_requests` (
   `receiveTime` int(11) NOT NULL,
   `eventId` varchar(128) NOT NULL,
   `shopPhoneNumber` varchar(128) NOT NULL,
+  `guildPhoneNumber` varchar(128) NOT NULL,
   `shopAddress` varchar(128),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
