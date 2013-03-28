@@ -58,4 +58,4 @@ INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testd
 
 delimiter $$
 
-INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testowner", "man", "testowner", 0, "test")$$
+INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testguild", "man", "testguild", 0, "test")$$

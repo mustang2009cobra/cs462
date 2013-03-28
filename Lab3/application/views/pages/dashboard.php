@@ -113,12 +113,12 @@ function renderDriverDashboard($user, $esls){
 function renderFlowerOwnerDashboard($user){
     ?>
     <h2>Welcome <?=$user->firstName?></h2>
-    <h3>Register your ESL with our site</h3>
+    <h3>Register your Guild ESL with our site</h3>
     <?php echo validation_errors(); ?>
     <?php echo form_open('owners/register_esl'); ?>
     <fieldset>
-        <input type="text" name="shopPhoneNumber" placeholder="Shop Phone Number"><br>
-        <input type="text" name="shopESL" placeholder="Shop ESL"><br>
+        <input type="text" name="shopPhoneNumber" placeholder="Guild Phone Number"><br>
+        <input type="text" name="shopESL" placeholder="Guild  ESL"><br>
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
     </fieldset>
     </form>
