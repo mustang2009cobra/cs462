@@ -14,6 +14,82 @@ class Consumer extends CI_Controller {
         //DATA THAT COMES FROM PRODUCERS
         $domain = $formData['_domain'];
         $name = $formData['_name'];
+
+        if($name === "delivery_ready"){
+            $this->process_delivery_ready_event($formData);
+        }
+        else if($name === "bid_awarded"){
+            $this->process_bid_awarded_event($formData);
+        }
+    }
+
+    public function foursquare(){
+        //GET FOURSQUARE CODE
+        $code = $this->input->get('code', TRUE);
+
+        //REQUEST ACCESS_TOKEN FROM FOURSQUARE
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://foursquare.com/oauth2/access_token?client_id=YVDRHKFFRL0LYQERSV1UKTWNXW2FLLUQUPCKA20R5KDWYUFD&client_secret=YZDMJEACOWFN5ECUQS43ENUK1HTQ2FXJEUMNZIEN4PPIDXXY&grant_type=authorization_code&redirect_uri=https://23.22.25.152/cs462/Lab3/index.php/consumer/foursquare&code=$code");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        $retData = json_decode($output);
+        $access_token = $retData->{"access_token"};
+
+        //SAVE ACCESS_TOKEN TO USERS DB
+        $this->load->model("users_model");
+        $this->users_model->set_foursquare_token($access_token);
+
+        //Update logged in user
+        $user = $this->session->userdata('user');
+        $user->foursquareToken = $access_token;
+        $this->session->set_userdata('user', $user);
+
+        redirect(site_url("dashboard/main?error=false"), 'location');
+    }
+
+    public function foursquarecheckin(){
+        $checkinRaw = $this->input->post('checkin', TRUE);
+        $checkin = json_decode($checkinRaw, TRUE);
+
+        $checkinData = array(
+            'lat' => $checkin['venue']['location']['lat'],
+            'lng' => $checkin['venue']['location']['lng'],
+            'createTime' => $checkin['createdAt']
+        );
+
+        $this->load->model("checkins_model");
+        $this->checkins_model->new_checkin($checkinData);
+    }
+
+    public function twilio(){
+        $data = $this->input->post(NULL, TRUE);
+
+        $smsBody = $data['Body'];
+
+        if($smsBody == "bid anyway"){
+            $this->load->model('deliveryrequests_model');
+            $this->load->model('esls_model');
+
+            //Get the last delivery request
+            $delivery_request = $this->deliveryrequests_model->get_most_recent_delivery_request();
+
+            //Signal the shops for a bid
+            $shops = $this->esls_model->get_esl_by_phone_number($delivery_request->shopPhoneNumber);
+            foreach($shops as $shop){
+                $esl = $shop->shopESL;
+                $this->signalBidAvailable($esl, $delivery_request->eventId);
+            }
+        }
+    }
+
+    private function process_bid_awarded_event($formData){
+
+    }
+
+    private function process_delivery_ready_event($formData){
         $eventId = $formData['eventId'];
         $shopAddress = $formData['shopAddress'];
         $phoneNumber = $formData['shopPhoneNumber'];
@@ -89,68 +165,6 @@ class Consumer extends CI_Controller {
                 '8019219541',
                 "Bid not made, bid anyway?"
             );
-        }
-    }
-
-    public function foursquare(){
-        //GET FOURSQUARE CODE
-        $code = $this->input->get('code', TRUE);
-
-        //REQUEST ACCESS_TOKEN FROM FOURSQUARE
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://foursquare.com/oauth2/access_token?client_id=YVDRHKFFRL0LYQERSV1UKTWNXW2FLLUQUPCKA20R5KDWYUFD&client_secret=YZDMJEACOWFN5ECUQS43ENUK1HTQ2FXJEUMNZIEN4PPIDXXY&grant_type=authorization_code&redirect_uri=https://23.22.25.152/cs462/Lab3/index.php/consumer/foursquare&code=$code");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-        $output = curl_exec($ch);
-        curl_close($ch);
-
-        $retData = json_decode($output);
-        $access_token = $retData->{"access_token"};
-
-        //SAVE ACCESS_TOKEN TO USERS DB
-        $this->load->model("users_model");
-        $this->users_model->set_foursquare_token($access_token);
-
-        //Update logged in user
-        $user = $this->session->userdata('user');
-        $user->foursquareToken = $access_token;
-        $this->session->set_userdata('user', $user);
-
-        redirect(site_url("dashboard/main?error=false"), 'location');
-    }
-
-    public function foursquarecheckin(){
-        $checkinRaw = $this->input->post('checkin', TRUE);
-        $checkin = json_decode($checkinRaw, TRUE);
-
-        $checkinData = array(
-            'lat' => $checkin['venue']['location']['lat'],
-            'lng' => $checkin['venue']['location']['lng'],
-            'createTime' => $checkin['createdAt']
-        );
-
-        $this->load->model("checkins_model");
-        $this->checkins_model->new_checkin($checkinData);
-    }
-
-    public function twilio(){
-        $data = $this->input->post(NULL, TRUE);
-
-        $smsBody = $data['Body'];
-
-        if($smsBody == "bid anyway"){
-            $this->load->model('deliveryrequests_model');
-            $this->load->model('esls_model');
-
-            //Get the last delivery request
-            $delivery_request = $this->deliveryrequests_model->get_most_recent_delivery_request();
-
-            //Signal the shops for a bid
-            $shops = $this->esls_model->get_esl_by_phone_number($delivery_request->shopPhoneNumber);
-            foreach($shops as $shop){
-                $esl = $shop->shopESL;
-                $this->signalBidAvailable($esl, $delivery_request->eventId);
-            }
         }
     }
 

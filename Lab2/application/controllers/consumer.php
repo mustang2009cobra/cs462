@@ -10,15 +10,23 @@ class Consumer extends CI_Controller {
 
         $formData = $this->input->post(NULL, TRUE);
 
-        //Get data to store
-        $data = array(
-            'deliveryRequestId' => $formData['deliveryRequestId'],
-            'driverName' => $formData['driverName'],
-            'estimatedDeliveryTime' => $formData['estimatedDeliveryTime']
-        );
+        $domain = $formData['_domain'];
+        $name = $formData['_name'];
 
-        //Store bid in DB and exit
-        $this->save_bid($data);
+        if($name === "bid_available"){
+            //Get data to store
+            $data = array(
+                'deliveryRequestId' => $formData['deliveryRequestId'],
+                'driverName' => $formData['driverName'],
+                'estimatedDeliveryTime' => $formData['estimatedDeliveryTime']
+            );
+
+            //Store bid in DB and exit
+            $this->save_bid($data);
+        }
+        else if($name === "delivery_complete"){
+            //Save to DB
+        }
     }
 
     private function save_bid($data){

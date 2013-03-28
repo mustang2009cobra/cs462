@@ -20,5 +20,14 @@ class Drivers_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    /**
+     * TODO - Fix this so it returns on the top drivers
+     */
+    public function get_top_drivers(){
+        $query = $this->db->get('drivers');
+
+        return $query->result();
+    }
+
     //Stuff goes here
 }
