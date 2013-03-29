@@ -20,6 +20,12 @@ class Drivers_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function get_driver_by_phone_number($phoneNumber){
+        $query = $this->get_where('drivers', array('driverPhoneNumber' => $phoneNumber));
+        $result = $query->result();
+        return $result[0];
+    }
+
     /**
      * TODO - Fix this so it returns on the top drivers
      */

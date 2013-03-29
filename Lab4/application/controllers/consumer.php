@@ -24,6 +24,7 @@ class Consumer extends CI_Controller {
                 '_name' => "bid_available",
                 'deliveryRequestId' => $formData['deliveryRequestId'],
                 'driverName' => $formData['driverName'],
+                'driverPhoneNumber' => $formData['driverPhoneNumber'],
                 'estimatedDeliveryTime' => $formData['estimatedDeliveryTime']
             );
 
@@ -42,6 +43,7 @@ class Consumer extends CI_Controller {
      * Consumer URL for the owner events
      */
     public function receive_owner(){
+        $this->load->model("drivers_model");
         $eslId = $this->uri->segment(3);
 
         $formData = $this->input->post(NULL, TRUE);
@@ -51,6 +53,24 @@ class Consumer extends CI_Controller {
 
         if($name === "bid_awarded"){
             //Save to bids_awarded table
+            $this->load->model("bids_awarded_model");
+            $bidAwardedData = array(
+                'driverPhoneNumber' => $formData['driverPhoneNumber'],
+                'shopAddress' => $formData['shopAddress'],
+                'shopPhoneNumber' => $formData['shopPhoneNumber'],
+                'deliveryAddress' => $formData['deliveryAddress'],
+                'pickupTime' => $formData['pickupTime'],
+                'deliveryTime' => $formData['deliveryTime']
+            );
+            $this->bids_awarded_model->new_bid_awarded($bidAwardedData);
+
+            $bidAwardedData['_domain'] = "rfq";
+            $bidAwardedData['_name'] = "bid_awarded";
+
+            $driver = $this->drivers_model->get_driver_by_phone_number($formData['driverPhoneNumber']);
+            $driverESL = $driver->driverESL;
+
+            $this->signalESL($driverESL, $bidAwardedData);
 
             //Signal driver that they've been awarded the bid
         }
@@ -74,8 +94,7 @@ class Consumer extends CI_Controller {
             $this->deliveryrequests_model->new_request($deliveryBidData);
 
             //Signal top three drivers
-            //TODO - Figure out logic for top three drivers (right now we're just doing all of them)
-            $this->load->model("drivers_model");
+            //TODO - Figure out logic for top three drivers (right now we're just doing all of them)=
             $drivers = $this->drivers_model->get_top_drivers();
             foreach($drivers as $driver){
                 $esl = $driver->driverESL;

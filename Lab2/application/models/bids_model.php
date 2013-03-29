@@ -17,6 +17,12 @@ class Bids_model extends CI_Model {
         return $query->result();
     }
 
+    public function get_bid($bidId){
+        $query = $this->db->get_where('deliverybids', array('id' => $bidId));
+        $result = $query->result();
+        return $result[0];
+    }
+
     public function set_bid_accepted($bidId){
 
         $data = array(

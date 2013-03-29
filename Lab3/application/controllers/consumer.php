@@ -86,7 +86,19 @@ class Consumer extends CI_Controller {
     }
 
     private function process_bid_awarded_event($formData){
+        $bidAwardedData = array(
+            'driverPhoneNumber' => $formData['driverPhoneNumber'],
+            'shopAddress' => $formData['shopAddress'],
+            'shopPhoneNumber' => $formData['shopPhoneNumber'],
+            'deliveryAddress' => $formData['deliveryAddress'],
+            'pickupTime' => $formData['pickupTime'],
+            'deliveryTime' => $formData['deliveryTime'],
+            `pickedUp` => 0,
+            'delivered' => 0
+        );
 
+        $this->load->model('bids_awarded_model');
+        $this->bids_awarded_model->new_bid_awarded($bidAwardedData);
     }
 
     private function process_delivery_ready_event($formData){
@@ -176,6 +188,7 @@ class Consumer extends CI_Controller {
             '_name' => 'bid_available',
             'shopPhoneNumber' => $phoneNumber,
             'deliveryRequestId' => $eventId,
+            'driverPhoneNumber' => "801-921-9541",
             'driverName' => 'Dave Woodruff',
             'estimatedDeliveryTime' => '15 minutes'
         );

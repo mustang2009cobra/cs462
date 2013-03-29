@@ -10,5 +10,4 @@ class Bids_awarded_model extends CI_Model {
 
         return $result;
     }
-
 }

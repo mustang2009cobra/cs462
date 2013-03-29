@@ -34,6 +34,12 @@ class Deliveryrequests_model extends CI_Model {
         return $query->result();
     }
 
+    public function get_delivery_request($id){
+        $query = $this->get_where('deliveryrequests', array('id' => $id));
+        $result = $query->result();
+        return $result[0];
+    }
+
     private function get_all_ESLs(){
         $ESLs = $this->db->get('drivers')->result();
         return $ESLs;

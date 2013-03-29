@@ -17,6 +17,7 @@ class Consumer extends CI_Controller {
             //Get data to store
             $data = array(
                 'deliveryRequestId' => $formData['deliveryRequestId'],
+                'driverPhoneNumber' => $formData['driverPhoneNumber'],
                 'driverName' => $formData['driverName'],
                 'estimatedDeliveryTime' => $formData['estimatedDeliveryTime']
             );

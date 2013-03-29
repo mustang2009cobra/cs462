@@ -34,6 +34,12 @@ delimiter $$
 
 CREATE TABLE `bids_awarded` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `driverPhoneNumber` varchar(128) NOT NULL,
+  `shopAddress` varchar(128) NOT NULL,
+  `shopPhoneNumber` varchar(128) NOT NULL,
+  `deliveryAddress` varchar(128) NOT NULL,
+  `pickupTime` varchar(128) NOT NULL,
+  `deliveryTime` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 

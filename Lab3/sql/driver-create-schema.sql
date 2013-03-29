@@ -54,6 +54,21 @@ CREATE TABLE `esls` (
 
 delimiter $$
 
+CREATE TABLE `bids_awarded` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `driverPhoneNumber` varchar(128) NOT NULL,
+  `shopAddress` varchar(128) NOT NULL,
+  `shopPhoneNumber` varchar(128) NOT NULL,
+  `deliveryAddress` varchar(128) NOT NULL,
+  `pickupTime` varchar(128) NOT NULL,
+  `deliveryTime` varchar(128) NOT NULL,
+  `pickedUp` tinyint(1),
+  `delivered` tinyint(1),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
 INSERT INTO `users` (firstName, lastName, email, admin, password) VALUES ("testdriver", "man", "testdriver", 1, "test")$$
 
 delimiter $$

@@ -37,6 +37,8 @@ delimiter $$
 CREATE TABLE `deliverybids` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `deliveryRequestId` int(11) NOT NULL,
+  `driverPhoneNumber` varchar(128) NOT NULL,
+  `guildPhoneNumber` varchar(128) NOT NULL,
   `driverName` varchar(128) NOT NULL,
   `estimatedDeliveryTime` varchar(128) NOT NULL,
   `accepted` tinyint(1),

@@ -37,9 +37,22 @@ class Owners extends CI_Controller {
         $this->load->model('bids_model');
         $success = $this->bids_model->set_bid_accepted($bidId);
 
-        //TODO - Send the bid_awarded event
-            //Data needed
-                //Driver phone number
+        $bid = $this->bids_model->get_bid($bidId);
+        $this->load->model("deliveryrequests_model");
+        $deliveryRequest = $this->deliveryrequests_model->get_delivery_request($bid->deliveryRequestId);
+
+        $esl = $bid->guildPhoneNumber;
+        $notificationData = array(
+            "_domain" => "rfq",
+            "_name" => "bid_awarded",
+            "driverPhoneNumber" => $bid->driverPhoneNumber,
+            "shopAddress" => $deliveryRequest['shopAddress'],
+            "shopPhoneNumber" => $deliveryRequest['shopPhoneNumber'],
+            "deliveryAddress" => $deliveryRequest['deliveryAddress'],
+            "pickupTime" => $deliveryRequest['pickupTime'],
+            "deliveryTime" => $deliveryRequest['deliveryTime']
+        );
+        $this->signalESL($esl, $notificationData);
 
         if($success){
             redirect(site_url('dashboard/bids?error=false'), 'location');
