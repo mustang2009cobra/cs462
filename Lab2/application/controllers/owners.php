@@ -68,15 +68,25 @@ class Owners extends CI_Controller {
         $formData = $this->input->post(NULL, TRUE);
         $this->load->model("deliveryrequests_model");
         $this->load->model("bids_model");
+        $this->load->model("drivers_model");
 
         $requestId = $formData['deliveryRequestId'];
         $request = $this->deliveryrequests_model->get_delivery_request($requestId);
         $acceptedBidId = $formData['acceptedBidId'];
+        $this->bids_model->set_picked_up($acceptedBidId);
         $acceptedBid = $this->bids_model->get_bid($acceptedBidId);
 
-        var_dump($request);
-        var_dump($acceptedBid);
-        die();
+        $signalData = array(
+            '_domain' => "delivery",
+            '_name' => "picked_up",
+            'driverPhoneNumber' => $acceptedBid->driverPhoneNumber
+        );
+
+        $driver = $this->drivers_model->get_driver_by_phone_number($acceptedBid->guildPhoneNumber);
+        $esl = $driver->driverESL;
+        $this->signalESL($esl, $signalData);
+
+        redirect(site_url('dashboard/bids?error=false'), 'location');
 
     }
 

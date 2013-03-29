@@ -11,4 +11,8 @@ class Bids_awarded_model extends CI_Model {
         return $result;
     }
 
+    public function set_picked_up($driverPhoneNumber){
+        $result = $this-
+    }
+
 }

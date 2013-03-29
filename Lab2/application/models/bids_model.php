@@ -35,4 +35,15 @@ class Bids_model extends CI_Model {
         return $result;
     }
 
+    public function set_picked_up($bidId){
+        $data = array(
+            'pickedUp' => 1
+        );
+
+        $this->db->where('id', $bidId);
+        $result = $this->db->update('deliverybids', $data);
+
+        return $result;
+    }
+
 }
