@@ -40,6 +40,8 @@ CREATE TABLE `bids_awarded` (
   `deliveryAddress` varchar(128) NOT NULL,
   `pickupTime` varchar(128) NOT NULL,
   `deliveryTime` varchar(128) NOT NULL,
+  `pickedUp` tinyint(1),
+  `delivered` tinyint(1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 

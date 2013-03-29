@@ -93,7 +93,6 @@ class Consumer extends CI_Controller {
             'deliveryAddress' => $formData['deliveryAddress'],
             'pickupTime' => $formData['pickupTime'],
             'deliveryTime' => $formData['deliveryTime'],
-            'pickedUp' => 0,
             'delivered' => 0
         );
 

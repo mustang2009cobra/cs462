@@ -61,7 +61,9 @@ class Consumer extends CI_Controller {
                 'shopPhoneNumber' => $formData['shopPhoneNumber'],
                 'deliveryAddress' => $formData['deliveryAddress'],
                 'pickupTime' => $formData['pickupTime'],
-                'deliveryTime' => $formData['deliveryTime']
+                'deliveryTime' => $formData['deliveryTime'],
+                'pickedUp' => 0,
+                'delivered' => 0
             );
             $this->bids_awarded_model->new_bid_awarded($bidAwardedData);
 

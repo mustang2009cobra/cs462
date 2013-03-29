@@ -51,7 +51,6 @@ function renderAcceptedBids($acceptedBids){
         <p>Shop Phone Number: <?=$acceptedBid->shopPhoneNumber?></p>
         <p>Desired Pickup Time: <?=$acceptedBid->pickupTime?></p>
         <p>Desired Delivery Time: <?=$acceptedBid->deliveryTime?></p>
-        <p>Picked Up: <?php if($acceptedBid->pickedUp == 1) { echo "Yes"; } else { echo "No"; } ?></p>
         <p>Delivered: <?php if($acceptedBid->delivered == 1) { echo "Yes"; } else { echo "No"; } ?></p>
         <?php
     }
