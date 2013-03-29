@@ -83,6 +83,18 @@ class Consumer extends CI_Controller {
                 $this->signalBidAvailable($esl, $delivery_request->eventId, $delivery_request->shopPhoneNumber);
             }
         }
+        else if($smsBody == "finished delivery"){
+            $this->load->model('bids_awarded_model');
+            $this->load->model('esls_model');
+
+            //Get the last bid awarded
+            $bid = $this->bids_awarded_model->get_most_recent_bid();
+            $this->bids_awarded_model->set_bid_delivered($bid->id);
+
+            //Signal the guild
+
+
+        }
     }
 
     private function process_bid_awarded_event($formData){
