@@ -26,7 +26,7 @@ class Consumer extends CI_Controller {
             //Store bid in DB and exit
             $this->save_bid($data);
         }
-        else if($name === "delivery_complete"){
+        else if($name === "complete"){
             $driverPhoneNumber = $formData['driverPhoneNumber'];
 
             $this->load->model('bids_model');
