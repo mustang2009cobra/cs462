@@ -46,4 +46,26 @@ class Bids_model extends CI_Model {
         return $result;
     }
 
+    public function set_delivered($driverPhoneNumber){
+        $query = $this->db->get_where('deliverybids', array('driverPhoneNumber' => $driverPhoneNumber));
+        $results = $query->result();
+
+        //Get most recent item
+        $result = $results[0];
+        foreach($results as $item){
+            if($item->id > $result->id){
+                $result = $item;
+            }
+        }
+
+        $updateData = array(
+            'delivered' => 1
+        );
+
+        $this->db->where('id', $result->id);
+        $result = $this->db->update('deliverybids', $updateData);
+
+        return $result;
+    }
+
 }

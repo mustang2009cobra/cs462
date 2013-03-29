@@ -27,7 +27,10 @@ class Consumer extends CI_Controller {
             $this->save_bid($data);
         }
         else if($name === "delivery_complete"){
-            
+            $driverPhoneNumber = $formData['driverPhoneNumber'];
+
+            $this->load->model('bids_model');
+            $this->bids_model->set_delivered($driverPhoneNumber);
         }
     }
 
