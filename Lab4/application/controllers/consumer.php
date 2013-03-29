@@ -78,7 +78,10 @@ class Consumer extends CI_Controller {
             //Signal driver that they've been awarded the bid
         }
         else if($name === "picked_up"){
-            //Save to deliveries_picked_up table
+            $driverPhoneNumber = $formData['driverPhoneNumber'];
+            $this->load->model("bids_awarded_model");
+            $this->bids_awarded_model->set_picked_up($driverPhoneNumber);
+
         }
         else if($name === "delivery_ready"){
             //Get relevant information
