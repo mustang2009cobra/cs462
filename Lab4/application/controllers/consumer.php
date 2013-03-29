@@ -14,9 +14,27 @@ class Consumer extends CI_Controller {
         $name = $formData['_name'];
 
         if($name === "complete"){
-            //Save to deliveries_complete table
+            $driverPhoneNumber = $formData['driverPhoneNumber'];
+            $shopPhoneNumber = $formData['shopPhoneNumber'];
 
-            //Forward on to flower_shop
+            //SAVE TO DB
+            $this->load->model("bids_awarded_model");
+            $this->bids_awarded_model->set_delivered($driverPhoneNumber);
+
+            //SIGNAL EVENT
+            $deliveredData = array(
+                '_domain' => 'delivery',
+                '_name' => 'complete',
+                'driverPhoneNumber' => $driverPhoneNumber,
+            );
+
+            //Find shop ESL
+            $this->load->model('owners_model');
+            $shops = $this->owners_model->get_owners_by_phone_number($shopPhoneNumber);
+            foreach($shops as $shop){
+                $esl = $shop->shopESL;
+                $this->signalESL($esl, $deliveredData);
+            }
         }
         else if($name === "bid_available"){
             $data = array(

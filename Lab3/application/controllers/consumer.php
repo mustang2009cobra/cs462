@@ -91,7 +91,20 @@ class Consumer extends CI_Controller {
             $bid = $this->bids_awarded_model->get_most_recent_bid();
             $this->bids_awarded_model->set_bid_delivered($bid->id);
 
-            //Signal the guild
+            //Set data
+            $deliveredData = array(
+                '_domain' => 'delivery',
+                '_name' => 'complete',
+                'driverPhoneNumber' => '801-921-9541',
+                'shopPhoneNumber' => '801-373-4477'
+            );
+
+            //Signal guild
+            $shops = $this->esls_model->get_esl_by_phone_number('801-111-1111');
+            foreach($shops as $shop){
+                $esl = $shop->shopESL;
+                $this->signalESL($esl, $deliveredData);
+            }
 
 
         }
@@ -206,6 +219,22 @@ class Consumer extends CI_Controller {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $esl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            print curl_error($ch);
+        } else {
+            curl_close($ch);
+        }
+        return $result;
+    }
+
+    private function signalESL($url, $data){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
