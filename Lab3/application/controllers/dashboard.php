@@ -21,7 +21,12 @@ class Dashboard extends CI_Controller {
 	}
 
     public function accepted_bids(){
-        $data = array();
+        $this->load->model("bids_awarded_model");
+        $acceptedBids = $this->bids_awarded_model->get_all_bids();
+
+        $data = array(
+            'acceptedBids' => $acceptedBids
+        );
 
         $this->load->view('templates/header');
         $this->load->view('pages/accepted_bids', $data);

@@ -10,4 +10,10 @@ class Bids_awarded_model extends CI_Model {
 
         return $result;
     }
+
+    public function get_all_bids(){
+        $query = $this->db->get('bids_awarded');
+
+        return $query->result();
+    }
 }
