@@ -130,9 +130,8 @@ function renderCreateESLSection(){
     echo form_open('drivers/create_esl');
     ?>
     <fieldset>
-        <input type="text" name="shopName" placeholder="Shop Name"><br>
-        <input type="text" name="shopAddress" placeholder="Shop Address"><br>
-        <input type="text" name="shopPhoneNumber" placeholder="Shop Phone Number"><br>
+        <input type="text" name="shopName" placeholder="Guild Name"><br>
+        <input type="text" name="shopPhoneNumber" placeholder="Guild Phone Number"><br>
         <button type="submit" name="submitRequest" class="btn btn-primary">Submit</button>
     </fieldset>
     </form>
@@ -143,9 +142,8 @@ function renderRegisteredESLs($esls){
     foreach($esls as $esl){
         if(isset($esl->shopName)){
             echo "<h5>$esl->shopName</h5>";
-            echo "<p> Address: $esl->shopAddress</p>";
-            echo "<p> Shop Phone Number: $esl->shopPhoneNumber</p>";
-            echo "<p> Flower Shop's ESL: $esl->shopESL</p>";
+            echo "<p> Guild Phone Number: $esl->shopPhoneNumber</p>";
+            echo "<p> Guild's ESL: $esl->shopESL</p>";
             $siteURL = site_url();
             $consumerESL = $siteURL . "/consumer/receive/" . $esl->id;
             echo "<p> Your Consumer ESL: $consumerESL</p>";
