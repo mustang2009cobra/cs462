@@ -65,8 +65,19 @@ class Owners extends CI_Controller {
     }
 
     public function bid_picked_up(){
-        var_dump("KLS");
-        //Signal that the bid was picked up
+        $formData = $this->input->post(NULL, TRUE);
+        $this->load->model("deliveryrequests_model");
+        $this->load->model("bids_model");
+
+        $requestId = $formData['deliveryRequestId'];
+        $request = $this->deliveryrequests_model->get_delivery_request($requestId);
+        $acceptedBidId = $formData['acceptedBidId'];
+        $acceptedBid = $this->bids_model->get_bid($acceptedBidId);
+
+        var_dump($request);
+        var_dump($acceptedBid);
+        die();
+
     }
 
     private function signalESL($esl, $data){
