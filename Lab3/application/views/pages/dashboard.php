@@ -108,6 +108,10 @@ function renderDriverDashboard($user, $esls){
     <?php
     renderFoursquareSection($user);
     renderTwilioSection();
+    ?>
+    <h3>Accepted Bids</h3>
+    <a href="<?=site_url().'/dashboard/accepted_bids'?>" name="viewAcceptedBids" id="viewAcceptedBids">View Accepted Bids</a>
+    <?php
 }
 
 function renderFlowerOwnerDashboard($user){

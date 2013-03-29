@@ -20,4 +20,12 @@ class Dashboard extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+    public function accepted_bids(){
+        $data = array();
+
+        $this->load->view('templates/header');
+        $this->load->view('pages/accepted_bids', $data);
+        $this->load->view('templates/footer');
+    }
+
 }
