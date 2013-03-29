@@ -16,6 +16,7 @@ class Consumer extends CI_Controller {
         if($name === "bid_available"){
             //Get data to store
             $data = array(
+                'guildPhoneNumber' => $formData['guildPhoneNumber'],
                 'deliveryRequestId' => $formData['deliveryRequestId'],
                 'driverPhoneNumber' => $formData['driverPhoneNumber'],
                 'driverName' => $formData['driverName'],

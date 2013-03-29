@@ -22,6 +22,7 @@ class Consumer extends CI_Controller {
             $data = array(
                 '_domain' => "rfq",
                 '_name' => "bid_available",
+                'guildPhoneNumber' => '801-111-1111',
                 'deliveryRequestId' => $formData['deliveryRequestId'],
                 'driverName' => $formData['driverName'],
                 'driverPhoneNumber' => $formData['driverPhoneNumber'],
