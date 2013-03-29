@@ -63,7 +63,10 @@ function renderAvailableBids($bids, $deliveryRequests){
             if(isset($acceptedBid)){
                 echo $acceptedBid->driverName . " has been chosen for this delivery";
                 if($acceptedBid->pickedUp == 1){
-                    echo "<br>The delivery has been picked up";
+                    echo "<br>The item has been picked up";
+                    if($acceptedBid->delivered == 1){
+                        echo "<br>The item has been delivered";
+                    }
                 }
                 else{
                     echo validation_errors();
