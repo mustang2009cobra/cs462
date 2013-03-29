@@ -35,7 +35,7 @@ class Deliveryrequests_model extends CI_Model {
     }
 
     public function get_delivery_request($id){
-        $query = $this->get_where('deliveryrequests', array('id' => $id));
+        $query = $this->db->get_where('deliveryrequests', array('id' => $id));
         $result = $query->result();
         return $result[0];
     }
