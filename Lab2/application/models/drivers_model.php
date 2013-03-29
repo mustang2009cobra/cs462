@@ -52,6 +52,12 @@ class Drivers_model extends CI_Model {
         }
     }
 
+    public function get_driver_by_phone_number($phoneNumber){
+        $query = $this->db->get_where('drivers', array('driverPhoneNumber' => $phoneNumber));
+        $results = $query->result();
+        return $results[0];
+    }
+
     public function get_all_esls_for_owner(){
         $query = $this->db->get('drivers');
 

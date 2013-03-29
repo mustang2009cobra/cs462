@@ -41,7 +41,9 @@ class Owners extends CI_Controller {
         $this->load->model("deliveryrequests_model");
         $deliveryRequest = $this->deliveryrequests_model->get_delivery_request($bid->deliveryRequestId);
 
-        $esl = $bid->guildPhoneNumber;
+        $this->load->model('drivers_model');
+        $driver = $this->drivers_model->get_driver_by_phone_number($bid->guildPhoneNumber);
+        $esl = $driver->driverESL;
         $notificationData = array(
             "_domain" => "rfq",
             "_name" => "bid_awarded",
@@ -69,7 +71,7 @@ class Owners extends CI_Controller {
 
     private function signalESL($esl, $data){
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, $esl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
