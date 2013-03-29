@@ -12,7 +12,7 @@ class Bids_awarded_model extends CI_Model {
     }
 
     public function set_picked_up($driverPhoneNumber){
-        $query = $this->db->get_where('bids_awarded', array('driverPhoneNumber', $driverPhoneNumber));
+        $query = $this->db->get_where('bids_awarded', array('driverPhoneNumber' => $driverPhoneNumber));
         $results = $query->result();
 
         //Get most recent item
