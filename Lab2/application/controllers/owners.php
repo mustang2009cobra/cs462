@@ -46,11 +46,11 @@ class Owners extends CI_Controller {
             "_domain" => "rfq",
             "_name" => "bid_awarded",
             "driverPhoneNumber" => $bid->driverPhoneNumber,
-            "shopAddress" => $deliveryRequest['shopAddress'],
-            "shopPhoneNumber" => $deliveryRequest['shopPhoneNumber'],
-            "deliveryAddress" => $deliveryRequest['deliveryAddress'],
-            "pickupTime" => $deliveryRequest['pickupTime'],
-            "deliveryTime" => $deliveryRequest['deliveryTime']
+            "shopAddress" => $deliveryRequest->shopAddress,
+            "shopPhoneNumber" => $deliveryRequest->shopPhoneNumber,
+            "deliveryAddress" => $deliveryRequest->deliveryAddress,
+            "pickupTime" => $deliveryRequest->pickupTime,
+            "deliveryTime" => $deliveryRequest->deliveryTime
         );
         $this->signalESL($esl, $notificationData);
 
